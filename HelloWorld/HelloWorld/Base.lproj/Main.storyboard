@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HelloWorld" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Example" translatesAutoresizingMaskIntoConstraints="NO" id="thw-oW-gtW">
+                                <rect key="frame" x="89" y="160" width="422" height="422"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="thw-oW-gtW" secondAttribute="height" multiplier="1:1" id="Nm6-rM-2dd"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86W-E1-qxe">
+                                <rect key="frame" x="38" y="20" width="524" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, World!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbL-8i-1Nw">
+                                        <rect key="frame" x="213" y="50" width="98" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="AVt-gU-TH6"/>
+                                            <constraint firstAttribute="width" constant="98" id="YiG-wM-6rA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="TbL-8i-1Nw" firstAttribute="centerX" secondItem="86W-E1-qxe" secondAttribute="centerX" id="9sk-UR-4Jo"/>
+                                    <constraint firstItem="TbL-8i-1Nw" firstAttribute="centerY" secondItem="86W-E1-qxe" secondAttribute="centerY" id="MZb-Co-SVQ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="86W-E1-qxe" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="B1b-qk-jkl"/>
+                            <constraint firstItem="thw-oW-gtW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="86W-E1-qxe" secondAttribute="bottom" constant="20" id="DY8-my-WJk"/>
+                            <constraint firstItem="86W-E1-qxe" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="HLT-O2-Lg8"/>
+                            <constraint firstItem="86W-E1-qxe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="18" id="JRj-f1-QpG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="thw-oW-gtW" secondAttribute="bottom" constant="18" id="P6T-N2-XNf"/>
+                            <constraint firstItem="thw-oW-gtW" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" priority="750" id="PrG-pw-Fn8"/>
+                            <constraint firstItem="86W-E1-qxe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TIF-xM-Cjg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="86W-E1-qxe" secondAttribute="trailing" constant="18" id="YdO-rh-ete"/>
+                            <constraint firstItem="thw-oW-gtW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lWE-en-17f"/>
+                            <constraint firstItem="thw-oW-gtW" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" priority="900" id="rdU-XT-GHW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="394" y="276"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Example" width="100" height="100"/>
+    </resources>
+</document>
