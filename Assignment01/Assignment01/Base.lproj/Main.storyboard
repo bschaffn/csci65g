@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -76,7 +77,68 @@
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVa-cC-Q19" userLabel="TopView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="266"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="kc1-ff-ZaB" userLabel="Frames / Second">
+                                        <rect key="frame" x="156" y="75" width="433" height="31"/>
+                                    </slider>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Cma-bb-mB7" userLabel="Grid Size">
+                                        <rect key="frame" x="156" y="30" width="433" height="31"/>
+                                    </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzr-TT-vRT" userLabel="Reset">
+                                        <rect key="frame" x="545" y="216" width="42" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Reset">
+                                            <color key="titleColor" red="0.8446037769317627" green="0.21206352114677429" blue="0.12609121203422546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grid Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLz-FH-wpe">
+                                        <rect key="frame" x="69" y="34" width="69" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frames / Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5x-sO-WWn">
+                                        <rect key="frame" x="8" y="79" width="130" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Atk-74-7kt" userLabel="Generation">
+                                        <rect key="frame" x="158" y="216" width="50" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="kRN-bi-x5g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKo-OE-x9a">
+                                        <rect key="frame" x="53" y="220" width="85" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.83177894353866577" green="0.91982489824295044" blue="0.95669323205947876" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.76809078454971313" green="0.66677647829055786" blue="0.92835313081741333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Atk-74-7kt" firstAttribute="leading" secondItem="Cma-bb-mB7" secondAttribute="leading" id="53t-G9-TVl"/>
+                                    <constraint firstItem="eLz-FH-wpe" firstAttribute="trailing" secondItem="p5x-sO-WWn" secondAttribute="trailing" id="FcH-ZV-8ln"/>
+                                    <constraint firstItem="p5x-sO-WWn" firstAttribute="leading" secondItem="WVa-cC-Q19" secondAttribute="leadingMargin" id="HaF-CY-feT"/>
+                                    <constraint firstItem="kc1-ff-ZaB" firstAttribute="trailing" secondItem="Cma-bb-mB7" secondAttribute="trailing" id="JOX-6B-G5B"/>
+                                    <constraint firstItem="kc1-ff-ZaB" firstAttribute="top" secondItem="Cma-bb-mB7" secondAttribute="bottom" constant="15" id="Jsm-cn-Ved"/>
+                                    <constraint firstItem="Cma-bb-mB7" firstAttribute="leading" secondItem="eLz-FH-wpe" secondAttribute="trailing" constant="20" id="Jwu-ug-K2K"/>
+                                    <constraint firstItem="Wzr-TT-vRT" firstAttribute="trailing" secondItem="Cma-bb-mB7" secondAttribute="trailing" id="Oby-IA-8Ab"/>
+                                    <constraint firstItem="kc1-ff-ZaB" firstAttribute="centerY" secondItem="p5x-sO-WWn" secondAttribute="centerY" id="Ta7-hY-q86"/>
+                                    <constraint firstItem="Cma-bb-mB7" firstAttribute="top" secondItem="WVa-cC-Q19" secondAttribute="top" constant="30" id="V4l-58-Lit"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wzr-TT-vRT" secondAttribute="bottom" constant="20" id="WKz-ro-TIx"/>
+                                    <constraint firstItem="kc1-ff-ZaB" firstAttribute="width" relation="lessThanOrEqual" secondItem="WVa-cC-Q19" secondAttribute="width" id="Yfo-mf-G9Y"/>
+                                    <constraint firstItem="Cma-bb-mB7" firstAttribute="centerY" secondItem="eLz-FH-wpe" secondAttribute="centerY" id="avr-nC-gCH"/>
+                                    <constraint firstItem="Wzr-TT-vRT" firstAttribute="centerY" secondItem="bKo-OE-x9a" secondAttribute="centerY" id="jwb-zl-Tnd"/>
+                                    <constraint firstItem="kc1-ff-ZaB" firstAttribute="width" secondItem="Cma-bb-mB7" secondAttribute="width" id="l5t-v4-GlA"/>
+                                    <constraint firstItem="bKo-OE-x9a" firstAttribute="trailing" secondItem="eLz-FH-wpe" secondAttribute="trailing" id="oo9-wo-R97"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Cma-bb-mB7" secondAttribute="trailing" constant="5" id="uNx-yg-zk4"/>
+                                    <constraint firstItem="Wzr-TT-vRT" firstAttribute="centerY" secondItem="Atk-74-7kt" secondAttribute="centerY" id="xF1-B0-DAU"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="10"/>
