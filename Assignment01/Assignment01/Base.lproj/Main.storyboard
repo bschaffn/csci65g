@@ -65,27 +65,80 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="195" y="279" width="210" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by InstrumentationViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDk-cv-Gan">
-                                <rect key="frame" x="166" y="329" width="268" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAC-dK-MiK" userLabel="BottomView">
+                                <rect key="frame" x="0.0" y="286" width="600" height="265"/>
+                                <color key="backgroundColor" red="0.72119545936584473" green="0.937366783618927" blue="0.76151520013809204" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVa-cC-Q19" userLabel="TopView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="266"/>
+                                <color key="backgroundColor" red="0.83177894353866577" green="0.91982489824295044" blue="0.95669323205947876" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="WVa-cC-Q19" secondAttribute="bottom" id="13u-PA-8HQ"/>
+                            <constraint firstAttribute="trailing" secondItem="WVa-cC-Q19" secondAttribute="trailing" id="2YK-ms-Jg2"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="CAC-dK-MiK" secondAttribute="bottom" id="BRq-cv-uaE"/>
+                            <constraint firstItem="WVa-cC-Q19" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="DDB-1M-xIb"/>
+                            <constraint firstItem="WVa-cC-Q19" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="Ei4-SG-JXu"/>
+                            <constraint firstItem="CAC-dK-MiK" firstAttribute="top" secondItem="WVa-cC-Q19" secondAttribute="bottom" id="Ho1-jD-E5w"/>
+                            <constraint firstItem="CAC-dK-MiK" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="IZf-CZ-JyO"/>
+                            <constraint firstAttribute="trailing" secondItem="CAC-dK-MiK" secondAttribute="trailing" id="Ls3-3L-dwN"/>
+                            <constraint firstItem="WVa-cC-Q19" firstAttribute="height" secondItem="CAC-dK-MiK" secondAttribute="height" id="Ns0-xH-LID"/>
+                            <constraint firstItem="WVa-cC-Q19" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="YQV-v8-3de"/>
+                            <constraint firstAttribute="trailing" secondItem="CAC-dK-MiK" secondAttribute="trailing" id="dbi-JO-sZA"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="CAC-dK-MiK" secondAttribute="bottom" id="flp-be-Ghy"/>
+                            <constraint firstItem="WVa-cC-Q19" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="fxf-Wm-a2n"/>
+                            <constraint firstItem="CAC-dK-MiK" firstAttribute="width" secondItem="WVa-cC-Q19" secondAttribute="width" id="nUx-T9-GEc"/>
+                            <constraint firstItem="CAC-dK-MiK" firstAttribute="leading" secondItem="WVa-cC-Q19" secondAttribute="trailing" id="oY6-nK-51K"/>
+                            <constraint firstItem="CAC-dK-MiK" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="upc-k2-7Z9"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DDB-1M-xIb"/>
+                                <exclude reference="YQV-v8-3de"/>
+                                <exclude reference="IZf-CZ-JyO"/>
+                                <exclude reference="dbi-JO-sZA"/>
+                                <exclude reference="nUx-T9-GEc"/>
+                                <exclude reference="oY6-nK-51K"/>
+                                <exclude reference="13u-PA-8HQ"/>
+                                <exclude reference="flp-be-Ghy"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="subviews">
+                                <include reference="CAC-dK-MiK"/>
+                                <include reference="WVa-cC-Q19"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2YK-ms-Jg2"/>
+                                <include reference="DDB-1M-xIb"/>
+                                <exclude reference="Ei4-SG-JXu"/>
+                                <exclude reference="Ns0-xH-LID"/>
+                                <include reference="YQV-v8-3de"/>
+                                <exclude reference="fxf-Wm-a2n"/>
+                                <exclude reference="Ho1-jD-E5w"/>
+                                <include reference="IZf-CZ-JyO"/>
+                                <exclude reference="Ls3-3L-dwN"/>
+                                <include reference="dbi-JO-sZA"/>
+                                <include reference="nUx-T9-GEc"/>
+                                <include reference="oY6-nK-51K"/>
+                                <exclude reference="upc-k2-7Z9"/>
+                                <include reference="13u-PA-8HQ"/>
+                                <exclude reference="BRq-cv-uaE"/>
+                                <include reference="flp-be-Ghy"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Instrumentation" image="second" id="cPa-gy-q4n" userLabel="Instrumentation"/>
                 </viewController>
