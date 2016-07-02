@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Lecture3" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="test text view" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bPq-F8-rw1" userLabel="Test Text View">
+                                <rect key="frame" x="180" y="240" width="240" height="120"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="42i-1R-Ffk"/>
+                                    <constraint firstAttribute="height" constant="120" id="hjj-eO-Vq3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNm-lh-P8h" userLabel="Reset">
+                                <rect key="frame" x="281" y="68" width="39" height="30"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="ResetPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YL5-Qg-XZd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SqC-Eg-OXR">
+                                <rect key="frame" x="270" y="30" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Nw5-BV-gye"/>
+                                    <constraint firstAttribute="width" constant="60" id="bdq-RV-GA4"/>
+                                </constraints>
+                                <state key="normal" title="A Button"/>
+                                <connections>
+                                    <action selector="MainButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rvE-qb-JR5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LNm-lh-P8h" firstAttribute="top" secondItem="SqC-Eg-OXR" secondAttribute="bottom" constant="8" symbolic="YES" id="18j-Fi-Vdk"/>
+                            <constraint firstItem="SqC-Eg-OXR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Usw-bE-miH"/>
+                            <constraint firstItem="LNm-lh-P8h" firstAttribute="centerX" secondItem="SqC-Eg-OXR" secondAttribute="centerX" id="gxf-0X-XEi"/>
+                            <constraint firstItem="bPq-F8-rw1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="izg-4u-BKR"/>
+                            <constraint firstItem="SqC-Eg-OXR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="mQ6-yZ-gnq"/>
+                            <constraint firstItem="bPq-F8-rw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zRV-tg-888"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="MainButton" destination="SqC-Eg-OXR" id="UhL-MX-DuV"/>
+                        <outlet property="ResetButton" destination="LNm-lh-P8h" id="Qmb-dn-UWa"/>
+                        <outlet property="TestTextView" destination="bPq-F8-rw1" id="tyo-5x-S2d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="350"/>
+        </scene>
+    </scenes>
+</document>
