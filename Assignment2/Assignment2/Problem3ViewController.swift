@@ -27,8 +27,28 @@ class Problem3ViewController: UIViewController {
     
     
     @IBAction func RunButtonPressed(sender: AnyObject) {
-        OutputText.text = "Button 3 Pressed."
-        print("Button 3 Pressed")
+        OutputText.text = "Button 3 Pressed.\n"
+        
+        //create 10 x 10 array
+        var initialStep = World(size: 10)
+        
+        //fill with values
+        initialStep.randomFill(percentTrue: 33)
+        
+        //count values
+        OutputText.text = OutputText.text + "before count: \(initialStep.count).\n"
+        
+        print("previous world:")
+        print(initialStep)
+        
+        //get next generation
+        let nextStep = World.step(prev: initialStep)
+        
+        print("current world:")
+        print(nextStep)
+        
+        //count new values
+        OutputText.text = OutputText.text + "after count: \(nextStep.count)."
     }
     
 }
