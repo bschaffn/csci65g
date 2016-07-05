@@ -16,7 +16,6 @@ class Problem3ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = "Problem 3"
     }
     
@@ -28,6 +27,7 @@ class Problem3ViewController: UIViewController {
     
     @IBAction func RunButtonPressed(sender: AnyObject) {
         OutputText.text = "Button 3 Pressed.\n"
+        print("Button 3 Pressed.")
         
         //create 10 x 10 array
         var initialStep = World(size: 10)

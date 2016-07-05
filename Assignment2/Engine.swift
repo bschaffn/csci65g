@@ -54,6 +54,25 @@ struct World: CustomStringConvertible {
         }
     }
     
+    func neighbors(row: Int, _ column: Int) -> Array<(Int, Int)> {
+        let neighborList = [
+            (row + 1, column + 1),
+            (row + 1, column),
+            (row + 1, column - 1),
+            
+            (row, column + 1),
+            (row, column - 1),
+            
+            (row - 1, column + 1),
+            (row - 1, column),
+            (row - 1, column - 1)
+        ]
+        
+        return neighborList.map { (row, column) in
+            ((row + ySize) % ySize, (column + xSize) % xSize)
+        }
+    }
+    
     mutating func randomFill(percentTrue percent: Int) {
         let maxInt = UInt32(100 / percent);
         
@@ -98,6 +117,27 @@ struct World: CustomStringConvertible {
         for y in 0..<prev.ySize {
             for x in 0..<prev.xSize {
                 switch (prev[x, y], neighbors(prev, cell: (y, x))) {
+                case (true, 2), (_, 3):
+                    next[x, y] = true
+                default:
+                    ()
+                }
+            }
+        }
+        
+        return next
+    }
+    
+    static func step2(prev prev: World) -> World {
+        var next = World(size: prev.xSize)
+        
+        for y in 0..<prev.ySize {
+            for x in 0..<prev.xSize {
+                let neighborCount = prev.neighbors(y, x).map({
+                    (y, x) in prev[x, y] ? 1 : 0
+                }).reduce(0, combine: +)
+                
+                switch (prev[x, y], neighborCount) {
                 case (true, 2), (_, 3):
                     next[x, y] = true
                 default:

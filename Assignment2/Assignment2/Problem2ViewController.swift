@@ -29,6 +29,7 @@ class Problem2ViewController: UIViewController {
         typealias LifeGrid = Array<Array<Bool>>
         
         OutputText.text = "Button 2 Pressed.\n"
+        print("Button 2 Pressed.")
         
         //utility functions
         func wprint(world: LifeGrid) {
