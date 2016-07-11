@@ -43,9 +43,13 @@ import UIKit
     
     var grid : Array<Array<CellState>>
     
+    // both are required for interface builder to not crash
+    // i could have set a default value for grid to not have to implement these
+    // but then i couldn't have used the rows and cols values instead of redefining constants
     required init?(coder aDecoder: NSCoder) {
         grid = [Array<CellState>](count: rows, repeatedValue:
             [CellState](count: cols, repeatedValue: .Empty))
+        
         
         super.init(coder: aDecoder)
     }
@@ -58,11 +62,78 @@ import UIKit
     }
     
     
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    // override func drawRect(rect: CGRect) {
-    
-    // }
+    override func drawRect(rect: CGRect) {
+        let gridPath = UIBezierPath()
+        gridPath.lineWidth = gridWidth
+        
+        let gridSpacing = min(bounds.width / CGFloat(cols), bounds.height / CGFloat(rows))
+        
+        // prevents odd line widths from being blurry
+        let strokeCorrect: CGFloat = gridWidth % 2 == 0 ? 0 : 0.5
+        
+        // construct bounds for best fit for grid
+        let gridBounds = (height: CGFloat(rows) * gridSpacing, width: CGFloat(cols) * gridSpacing)
+        
+        let top = (bounds.height - gridBounds.height) / 2
+        
+        let left = (bounds.width - gridBounds.width) / 2
+        
+        //vertical grid lines
+        for column in 1..<cols {
+            let col = CGFloat(column)
+
+            gridPath.moveToPoint(CGPoint(
+                x: round(left + col * gridSpacing) + strokeCorrect, y: top
+            ))
+            
+            gridPath.addLineToPoint(CGPoint(
+                x: round(left + col * gridSpacing) + strokeCorrect, y: top + gridBounds.height
+            ))
+        }
+        
+        //horizontal grid lines
+        for r in 1..<rows {
+            let row = CGFloat(r)
+            
+            gridPath.moveToPoint(CGPoint(
+                x: left, y: round(top + row * gridSpacing) + strokeCorrect
+            ))
+            
+            gridPath.addLineToPoint(CGPoint(
+                x: left + gridBounds.width, y: round(top + row * gridSpacing) + strokeCorrect
+            ))
+        }
+        
+        gridColor.setStroke()
+        gridPath.stroke()
+        
+        for y in 0..<rows {
+            for x in 0..<cols {
+                let cellOrigin = CGPoint(x: gridWidth/2 + left + CGFloat(x) * gridSpacing,
+                                         y: gridWidth/2 + top + CGFloat(y) * gridSpacing)
+                
+                let cellSize = CGSize(width: gridSpacing - gridWidth, height: gridSpacing - gridWidth)
+                
+                let cellRect = CGRect(origin: cellOrigin, size: cellSize)
+                
+                let cellPath = UIBezierPath(ovalInRect: cellRect)
+                
+                switch grid[y][x] {
+                case .Empty:
+                    emptyColor.setFill()
+                case .Born:
+                    emptyColor.setFill()
+                case .Died:
+                    bornColor.setFill()
+                case .Living:
+                    livingColor.setFill()
+                }
+                
+                cellPath.fill()
+            }
+        }
+        
+    }
     
 
 }
