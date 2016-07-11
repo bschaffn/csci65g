@@ -59,6 +59,14 @@ import UIKit
         }
     }
     
+    // helper functions for grid layout
+    func getCellBoundsForIndex(x: Int, _ y: Int) -> CGRect {
+        let xPos = gridBounds.left + CGFloat(x) * gridSpacing
+        let yPos = gridBounds.top + CGFloat(y) * gridSpacing
+        
+        return CGRect(x: xPos, y: yPos, width: gridSpacing, height: gridSpacing)
+    }
+    
     var grid : World
     
     // both are required for interface builder to not crash
@@ -90,9 +98,7 @@ import UIKit
         
         grid[x,y] = CellState.toggle(grid[x,y])
         
-        self.setNeedsDisplayInRect(CGRect(origin: CGPoint(x: gridBounds.left + CGFloat(x) * gridSpacing,
-            y: gridBounds.top + CGFloat(y) * gridSpacing),
-            size: CGSize(width: gridSpacing, height: gridSpacing)))
+        self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
     }
     
     
@@ -111,7 +117,7 @@ import UIKit
         //vertical grid lines
         for column in 1..<cols {
             let col = CGFloat(column)
-
+            
             gridPath.moveToPoint(CGPoint(
                 x: round(left + col * gridSpacing) + strokeCorrect, y: top
             ))
@@ -140,12 +146,14 @@ import UIKit
         //cells
         for y in 0..<rows {
             for x in 0..<cols {
-                let cellOrigin = CGPoint(x: gridWidth/2 + left + CGFloat(x) * gridSpacing,
-                                         y: gridWidth/2 + top + CGFloat(y) * gridSpacing)
+                let xPos = round(left + CGFloat(x) * gridSpacing)
+                let yPos = round(left + CGFloat(y) * gridSpacing)
+            
+                let width = round(left + CGFloat(x+1) * gridSpacing) - xPos
+                let height = round(top + CGFloat(y+1) * gridSpacing) - yPos
                 
-                let cellSize = CGSize(width: gridSpacing - gridWidth + strokeCorrect, height: gridSpacing - gridWidth + strokeCorrect)
-                
-                let cellRect = CGRect(origin: cellOrigin, size: cellSize)
+                let cellRect = CGRect(x: xPos + gridWidth / 2, y: yPos + gridWidth / 2,
+                                      width: width - gridWidth, height: height - gridWidth)
                 
                 let cellPath = UIBezierPath(ovalInRect: cellRect)
                 
