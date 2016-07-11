@@ -13,15 +13,13 @@ import UIKit
     
     @IBInspectable var rows: Int = 20 {
         didSet {
-            grid = [Array<CellState>](count: rows, repeatedValue:
-                [CellState](count: cols, repeatedValue: .Empty))
+            grid = World(rows: rows, cols: cols)
         }
     }
     
     @IBInspectable var cols: Int = 20 {
         didSet {
-            grid = [Array<CellState>](count: rows, repeatedValue:
-                [CellState](count: cols, repeatedValue: .Empty))
+            grid = World(rows: rows, cols: cols)
         }
     }
     
@@ -61,7 +59,7 @@ import UIKit
         }
     }
     
-    var grid : Array<Array<CellState>>
+    var grid : World
     
     // both are required for interface builder to not crash
     // i could have set a default value for grid to not have to implement these
@@ -69,17 +67,14 @@ import UIKit
     
     // contentMode.Redraw tells ios to redraw everything on resize
     required init?(coder aDecoder: NSCoder) {
-        grid = [Array<CellState>](count: rows, repeatedValue:
-            [CellState](count: cols, repeatedValue: .Empty))
+        grid = World(rows: rows, cols: cols)
         
         super.init(coder: aDecoder)
         contentMode = .Redraw
     }
     
     override init(frame: CGRect) {
-        grid = [Array<CellState>](count: rows, repeatedValue:
-            [CellState](count: cols, repeatedValue: .Empty))
-        
+        grid = World(rows: rows, cols: cols)
         
         super.init(frame: frame)
         contentMode = .Redraw
@@ -93,7 +88,7 @@ import UIKit
         let x = Int( floor((touchPoint!.x - gridBounds.left) / gridSpacing) )
         let y = Int( floor((touchPoint!.y - gridBounds.top) / gridSpacing) )
         
-        grid[y][x] = CellState.toggle(grid[y][x])
+        grid[x,y] = CellState.toggle(grid[x,y])
         
         self.setNeedsDisplayInRect(CGRect(origin: CGPoint(x: gridBounds.left + CGFloat(x) * gridSpacing,
             y: gridBounds.top + CGFloat(y) * gridSpacing),
@@ -154,7 +149,7 @@ import UIKit
                 
                 let cellPath = UIBezierPath(ovalInRect: cellRect)
                 
-                switch grid[y][x] {
+                switch grid[x, y] {
                 case .Empty:
                     emptyColor.setFill()
                 case .Born:
