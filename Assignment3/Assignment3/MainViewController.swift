@@ -11,6 +11,8 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var fillButton: UIButton!
+    
     @IBOutlet weak var lifeGrid: GridView!
     
     override func viewDidLoad() {
@@ -33,5 +35,12 @@ class MainViewController: UIViewController {
         lifeGrid.setNeedsDisplay()
     }
     
+    @IBAction func fillButtonPressed(sender: AnyObject) {
+        lifeGrid.grid = World(rows: lifeGrid.rows, cols: lifeGrid.cols)
+        
+        lifeGrid.grid.randomFill(percentTrue: 33)
+        
+        lifeGrid.setNeedsDisplay()
+    }
 
 }

@@ -105,6 +105,7 @@ import UIKit
     override func drawRect(rect: CGRect) {
         let gridPath = UIBezierPath()
         gridPath.lineWidth = gridWidth
+        gridPath.lineCapStyle = .Round
         
         // prevents odd line widths from being blurry
         let strokeCorrect: CGFloat = gridWidth % 2 == 0 ? 0 : 0.5
@@ -119,11 +120,11 @@ import UIKit
             let col = CGFloat(column)
             
             gridPath.moveToPoint(CGPoint(
-                x: round(left + col * gridSpacing) + strokeCorrect, y: top
+                x: round(left + col * gridSpacing) + strokeCorrect, y: top + gridWidth
             ))
             
             gridPath.addLineToPoint(CGPoint(
-                x: round(left + col * gridSpacing) + strokeCorrect, y: top + gridBounds.height
+                x: round(left + col * gridSpacing) + strokeCorrect, y: top + gridBounds.height - gridWidth
             ))
         }
         
@@ -132,11 +133,11 @@ import UIKit
             let row = CGFloat(r)
             
             gridPath.moveToPoint(CGPoint(
-                x: left, y: round(top + row * gridSpacing) + strokeCorrect
+                x: left + gridWidth , y: round(top + row * gridSpacing) + strokeCorrect
             ))
             
             gridPath.addLineToPoint(CGPoint(
-                x: left + gridBounds.width, y: round(top + row * gridSpacing) + strokeCorrect
+                x: left + gridBounds.width - gridWidth, y: round(top + row * gridSpacing) + strokeCorrect
             ))
         }
         

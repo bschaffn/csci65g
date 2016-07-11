@@ -3,7 +3,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -65,18 +67,63 @@
                                     <action selector="nextButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lfx-DT-3sw"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LmH-CT-ACQ">
+                                <rect key="frame" x="510" y="548" width="30" height="30"/>
+                                <state key="normal" title="Fill">
+                                    <color key="titleColor" red="0.3664986789226532" green="0.12673145532608032" blue="0.38439199328422546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fillButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xy-CR-gn1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.47843137250000001" green="0.67450980390000004" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="sb6-12-xFy" firstAttribute="top" secondItem="GOZ-71-B3G" secondAttribute="top" id="4Ax-a8-OPV"/>
+                            <constraint firstItem="sb6-12-xFy" firstAttribute="leading" secondItem="GOZ-71-B3G" secondAttribute="trailing" constant="36" id="FVl-vm-ctr"/>
+                            <constraint firstItem="LmH-CT-ACQ" firstAttribute="centerY" secondItem="sb6-12-xFy" secondAttribute="centerY" id="Sbx-bF-3Tb"/>
+                            <constraint firstItem="LmH-CT-ACQ" firstAttribute="bottom" secondItem="GOZ-71-B3G" secondAttribute="bottom" id="TB9-5L-l9v"/>
+                            <constraint firstItem="LmH-CT-ACQ" firstAttribute="leading" secondItem="sb6-12-xFy" secondAttribute="leading" id="TGf-dq-deV"/>
                             <constraint firstItem="sb6-12-xFy" firstAttribute="top" secondItem="GOZ-71-B3G" secondAttribute="bottom" constant="8" id="bfr-c4-QHH"/>
                             <constraint firstItem="sb6-12-xFy" firstAttribute="leading" secondItem="GOZ-71-B3G" secondAttribute="leading" id="dfY-Qw-ZxJ"/>
                             <constraint firstItem="GOZ-71-B3G" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="duC-6P-LBS"/>
                             <constraint firstItem="GOZ-71-B3G" firstAttribute="width" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="gZT-4O-A3C"/>
                             <constraint firstItem="GOZ-71-B3G" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" priority="750" id="kKx-Uf-9l3"/>
+                            <constraint firstItem="GOZ-71-B3G" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="14" id="nZJ-XJ-p7b"/>
+                            <constraint firstItem="LmH-CT-ACQ" firstAttribute="trailing" secondItem="GOZ-71-B3G" secondAttribute="trailing" id="tQd-rf-e0b"/>
                             <constraint firstItem="GOZ-71-B3G" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xZl-hD-zn3"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="nZJ-XJ-p7b"/>
+                                <exclude reference="4Ax-a8-OPV"/>
+                                <exclude reference="FVl-vm-ctr"/>
+                                <exclude reference="TB9-5L-l9v"/>
+                                <exclude reference="TGf-dq-deV"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="subviews">
+                                <include reference="GOZ-71-B3G"/>
+                                <include reference="sb6-12-xFy"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="duC-6P-LBS"/>
+                                <include reference="nZJ-XJ-p7b"/>
+                                <exclude reference="xZl-hD-zn3"/>
+                                <include reference="4Ax-a8-OPV"/>
+                                <include reference="FVl-vm-ctr"/>
+                                <exclude reference="bfr-c4-QHH"/>
+                                <exclude reference="dfY-Qw-ZxJ"/>
+                                <exclude reference="Sbx-bF-3Tb"/>
+                                <include reference="TB9-5L-l9v"/>
+                                <include reference="TGf-dq-deV"/>
+                                <exclude reference="tQd-rf-e0b"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="fillButton" destination="LmH-CT-ACQ" id="8wo-Qz-2VL"/>
                         <outlet property="lifeGrid" destination="GOZ-71-B3G" id="50X-QM-akO"/>
                         <outlet property="nextButton" destination="sb6-12-xFy" id="sGa-gG-oux"/>
                     </connections>
@@ -88,7 +135,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="332" y="349"/>
+            <point key="canvasLocation" x="332" y="348"/>
         </scene>
     </scenes>
 </document>
