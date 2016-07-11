@@ -21,6 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GOZ-71-B3G" customClass="GridView" customModule="Assignment3" customModuleProvider="target">
                                 <rect key="frame" x="60" y="60" width="480" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rows">
                                         <integer key="value" value="20"/>
@@ -47,6 +48,9 @@
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="yke-GJ-fLf" appends="YES" id="D4Z-GQ-POr"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.41367475180000002" green="0.42138200059999997" blue="0.66607481059999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,6 +63,11 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="yke-GJ-fLf">
+                    <connections>
+                        <action selector="gridViewTap:" destination="GOZ-71-B3G" id="NDu-PA-f5v"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="332" y="349"/>
         </scene>

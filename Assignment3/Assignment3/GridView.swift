@@ -9,6 +9,7 @@
 import UIKit
 
 @IBDesignable class GridView: UIView {
+    typealias GridBounds = (left: CGFloat, top: CGFloat, width: CGFloat, height: CGFloat)
     
     @IBInspectable var rows: Int = 20 {
         didSet {
@@ -41,24 +42,62 @@ import UIKit
     
     @IBInspectable var gridWidth: CGFloat = 1.0
     
+    // computed properties for grid layout
+    
+    var gridSpacing: CGFloat {
+        get {
+            return min(bounds.width / CGFloat(cols), bounds.height / CGFloat(rows))
+        }
+    }
+    
+    var gridBounds: GridBounds {
+        get {
+            let height = CGFloat(rows) * gridSpacing
+            let width =  CGFloat(cols) * gridSpacing
+            let top = (bounds.height - height) / 2
+            let left = (bounds.width - width) / 2
+            
+            return (left, top, width, height)
+        }
+    }
+    
     var grid : Array<Array<CellState>>
     
     // both are required for interface builder to not crash
     // i could have set a default value for grid to not have to implement these
     // but then i couldn't have used the rows and cols values instead of redefining constants
+    
+    // contentMode.Redraw tells ios to redraw everything on resize
     required init?(coder aDecoder: NSCoder) {
         grid = [Array<CellState>](count: rows, repeatedValue:
             [CellState](count: cols, repeatedValue: .Empty))
         
-        
         super.init(coder: aDecoder)
+        contentMode = .Redraw
     }
     
     override init(frame: CGRect) {
         grid = [Array<CellState>](count: rows, repeatedValue:
             [CellState](count: cols, repeatedValue: .Empty))
         
+        
         super.init(frame: frame)
+        contentMode = .Redraw
+    }
+    
+    @IBAction func gridViewTap(gesture: UITapGestureRecognizer?) {
+        let touchPoint = gesture?.locationInView(self)
+        
+        print(touchPoint!)
+        
+        let x = Int( floor((touchPoint!.x - gridBounds.left) / gridSpacing) )
+        let y = Int( floor((touchPoint!.y - gridBounds.top) / gridSpacing) )
+        
+        grid[y][x] = CellState.toggle(grid[y][x])
+        
+        self.setNeedsDisplayInRect(CGRect(origin: CGPoint(x: gridBounds.left + CGFloat(x) * gridSpacing,
+            y: gridBounds.top + CGFloat(y) * gridSpacing),
+            size: CGSize(width: gridSpacing, height: gridSpacing)))
     }
     
     
@@ -66,17 +105,13 @@ import UIKit
         let gridPath = UIBezierPath()
         gridPath.lineWidth = gridWidth
         
-        let gridSpacing = min(bounds.width / CGFloat(cols), bounds.height / CGFloat(rows))
-        
         // prevents odd line widths from being blurry
         let strokeCorrect: CGFloat = gridWidth % 2 == 0 ? 0 : 0.5
         
-        // construct bounds for best fit for grid
-        let gridBounds = (height: CGFloat(rows) * gridSpacing, width: CGFloat(cols) * gridSpacing)
-        
-        let top = (bounds.height - gridBounds.height) / 2
-        
-        let left = (bounds.width - gridBounds.width) / 2
+        // grid layout padding
+        let top = gridBounds.top
+        let left = gridBounds.left
+
         
         //vertical grid lines
         for column in 1..<cols {
@@ -107,12 +142,13 @@ import UIKit
         gridColor.setStroke()
         gridPath.stroke()
         
+        //cells
         for y in 0..<rows {
             for x in 0..<cols {
                 let cellOrigin = CGPoint(x: gridWidth/2 + left + CGFloat(x) * gridSpacing,
                                          y: gridWidth/2 + top + CGFloat(y) * gridSpacing)
                 
-                let cellSize = CGSize(width: gridSpacing - gridWidth, height: gridSpacing - gridWidth)
+                let cellSize = CGSize(width: gridSpacing - gridWidth + strokeCorrect, height: gridSpacing - gridWidth + strokeCorrect)
                 
                 let cellRect = CGRect(origin: cellOrigin, size: cellSize)
                 
