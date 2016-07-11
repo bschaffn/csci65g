@@ -10,13 +10,6 @@ import UIKit
 
 @IBDesignable class GridView: UIView {
     
-    required init?(coder aDecoder: NSCoder) {
-        grid = [Array<CellState>](count: rows, repeatedValue:
-            [CellState](count: cols, repeatedValue: .Empty))
-        
-        super.init(coder: aDecoder)
-    }
-    
     @IBInspectable var rows: Int = 20 {
         didSet {
             grid = [Array<CellState>](count: rows, repeatedValue:
@@ -31,14 +24,10 @@ import UIKit
         }
     }
     
-    @IBInspectable var livingColor: UIColor = UIColor(red: CGFloat(1.0),
-                                                      green: CGFloat(1.0),
-                                                      blue: CGFloat(1.0),
-                                                      alpha: CGFloat(1.0))
-    @IBInspectable var emptyColor: UIColor = UIColor(red: CGFloat(0.0),
-                                                     green: CGFloat(0.0),
-                                                     blue: CGFloat(0.0),
-                                                     alpha: CGFloat(1.0))
+    @IBInspectable var livingColor: UIColor = UIColor.whiteColor()
+    
+    @IBInspectable var emptyColor: UIColor = UIColor.blackColor()
+    
     @IBInspectable var bornColor: UIColor = UIColor(red: CGFloat(0.9),
                                                     green: CGFloat(1.0),
                                                     blue: CGFloat(0.9),
@@ -46,18 +35,34 @@ import UIKit
     @IBInspectable var diedColor: UIColor = UIColor(red: CGFloat(0.2),
                                                     green: CGFloat(0.1),
                                                     blue: CGFloat(0.1),
-                                                    alpha: CGFloat(0.0))
+                                                    alpha: CGFloat(1.0))
+    
+    @IBInspectable var gridColor: UIColor = UIColor.lightGrayColor()
     
     @IBInspectable var gridWidth: CGFloat = 1.0
     
     var grid : Array<Array<CellState>>
     
-    /*
+    required init?(coder aDecoder: NSCoder) {
+        grid = [Array<CellState>](count: rows, repeatedValue:
+            [CellState](count: cols, repeatedValue: .Empty))
+        
+        super.init(coder: aDecoder)
+    }
+    
+    override init(frame: CGRect) {
+        grid = [Array<CellState>](count: rows, repeatedValue:
+            [CellState](count: cols, repeatedValue: .Empty))
+        
+        super.init(frame: frame)
+    }
+    
+    
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+    // override func drawRect(rect: CGRect) {
+    
+    // }
+    
 
 }
