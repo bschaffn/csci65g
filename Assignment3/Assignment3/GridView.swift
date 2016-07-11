@@ -153,9 +153,9 @@ import UIKit
                 case .Empty:
                     emptyColor.setFill()
                 case .Born:
-                    emptyColor.setFill()
-                case .Died:
                     bornColor.setFill()
+                case .Died:
+                    diedColor.setFill()
                 case .Living:
                     livingColor.setFill()
                 }
