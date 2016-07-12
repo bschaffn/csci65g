@@ -15,9 +15,14 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var lifeGrid: GridView!
     
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
+    @IBOutlet var panGesture: UIPanGestureRecognizer!
+    
+    // i should put this in a custom gesture recogniser class but w/e
+    var heldState: CellState = .Empty
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -42,5 +47,34 @@ class MainViewController: UIViewController {
         
         lifeGrid.setNeedsDisplay()
     }
+    
+    @IBAction func gridViewTap(gesture: UITapGestureRecognizer?) {
+        let touchPoint = gesture?.locationInView(lifeGrid)
+        
+        print(touchPoint!)
+        
+        lifeGrid.toggleCellAtPoint(touchPoint!)
+        
+    }
+    
+    @IBAction func gridViewDragged(gesture: UIPanGestureRecognizer?) {
+        let touchPoint = gesture?.locationInView(lifeGrid)
+        print("state: \(gesture!.state.rawValue) \(touchPoint!)")
+        
+        switch(gesture!.state) {
+        case .Began:
+            heldState = CellState.toggle(lifeGrid.getCellAtPoint(touchPoint!))
+            fallthrough
+        case .Changed:
+            lifeGrid.setCellAtPoint(touchPoint!, state: heldState)
+        case .Ended:
+            print("ended pan.")
+        default:
+            ()
+        }
+    }
 
+    
+    
+    
 }

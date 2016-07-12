@@ -67,6 +67,36 @@ import UIKit
         return CGRect(x: xPos, y: yPos, width: gridSpacing, height: gridSpacing)
     }
     
+    func getNearestIndex(point point: CGPoint) -> (Int, Int)  {
+        let x = Int( floor((point.x - gridBounds.left) / gridSpacing) )
+        let y = Int( floor((point.y - gridBounds.top) / gridSpacing) )
+        
+        return (x, y)
+    }
+    
+    func getCellAtPoint(point: CGPoint) -> CellState {
+        let (x, y) = getNearestIndex(point: point)
+        
+        return grid[x,y]
+    }
+    
+    func setCellAtPoint(point: CGPoint, state: CellState) {
+        let (x, y) = getNearestIndex(point: point)
+        
+        grid[x,y] = state
+        
+        self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
+    }
+    
+    func toggleCellAtPoint(point: CGPoint) {
+        let (x, y) = getNearestIndex(point: point)
+        
+        grid[x,y] = CellState.toggle(grid[x,y])
+        
+        self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
+    }
+    
+    
     var grid : World
     
     // both are required for interface builder to not crash
@@ -86,19 +116,6 @@ import UIKit
         
         super.init(frame: frame)
         contentMode = .Redraw
-    }
-    
-    @IBAction func gridViewTap(gesture: UITapGestureRecognizer?) {
-        let touchPoint = gesture?.locationInView(self)
-        
-        print(touchPoint!)
-        
-        let x = Int( floor((touchPoint!.x - gridBounds.left) / gridSpacing) )
-        let y = Int( floor((touchPoint!.y - gridBounds.top) / gridSpacing) )
-        
-        grid[x,y] = CellState.toggle(grid[x,y])
-        
-        self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
     }
     
     

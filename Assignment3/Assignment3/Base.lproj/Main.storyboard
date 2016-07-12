@@ -56,6 +56,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="yke-GJ-fLf" appends="YES" id="D4Z-GQ-POr"/>
+                                    <outletCollection property="gestureRecognizers" destination="EXd-ng-0OM" appends="YES" id="3VR-Lv-7Sc"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sb6-12-xFy">
@@ -126,14 +127,21 @@
                         <outlet property="fillButton" destination="LmH-CT-ACQ" id="8wo-Qz-2VL"/>
                         <outlet property="lifeGrid" destination="GOZ-71-B3G" id="50X-QM-akO"/>
                         <outlet property="nextButton" destination="sb6-12-xFy" id="sGa-gG-oux"/>
+                        <outlet property="panGesture" destination="EXd-ng-0OM" id="Lmm-kd-96x"/>
+                        <outlet property="tapGesture" destination="yke-GJ-fLf" id="65A-3D-1nd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="yke-GJ-fLf">
                     <connections>
-                        <action selector="gridViewTap:" destination="GOZ-71-B3G" id="NDu-PA-f5v"/>
+                        <action selector="gridViewTap:" destination="BYZ-38-t0r" id="Y5i-dw-E6h"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="EXd-ng-0OM">
+                    <connections>
+                        <action selector="gridViewDragged:" destination="BYZ-38-t0r" id="9oQ-U3-ymO"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="332" y="348"/>
         </scene>
