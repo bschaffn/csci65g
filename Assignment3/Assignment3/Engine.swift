@@ -8,19 +8,6 @@
 
 import Foundation
 
-// utility for bounding arrays
-func clamp(value: Int, min: Int, max: Int) -> Int {
-    if value < min {
-        return min
-    }
-    
-    if value >= max {
-        return max - 1
-    }
-    
-    return value
-}
-
 enum CellState: String {
     case Living = "Living"
     case Empty = "Empty"
@@ -105,6 +92,19 @@ struct World: CustomStringConvertible {
         }
     }
     
+    // utility for bounding arrays
+    func clamp(value: Int, min: Int, max: Int) -> Int {
+        if value < min {
+            return min
+        }
+        
+        if value >= max {
+            return max - 1
+        }
+        
+        return value
+    }
+    
     subscript(x: Int, y: Int) -> CellState {
         get {
             return data[clamp(y, min: 0, max: ySize)][clamp(x, min:0, max: xSize)]
@@ -135,11 +135,9 @@ struct World: CustomStringConvertible {
     }
     
     mutating func randomFill(percentTrue percent: Int) {
-        let maxInt = UInt32(100 / percent);
-        
         for i in 0..<ySize {
             for j in 0..<xSize {
-                if arc4random_uniform(maxInt) == 1 {
+                if arc4random_uniform(100) < UInt32(percent) {
                     data[i][j] = .Living
                 }
             }
