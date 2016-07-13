@@ -20,6 +20,7 @@ import UIKit
     @IBInspectable var cols: Int = 20 {
         didSet {
             grid = World(rows: rows, cols: cols)
+            
         }
     }
     
@@ -124,37 +125,49 @@ import UIKit
         gridPath.lineWidth = gridWidth
         gridPath.lineCapStyle = .Round
         
+        if rows <= 0 || cols <= 0 {
+            return
+        }
+        
         // prevents odd line widths from being blurry
         let strokeCorrect: CGFloat = gridWidth % 2 == 0 ? 0 : 0.5
-        
-        // grid layout padding
-        let top = gridBounds.top
-        let left = gridBounds.left
 
+        //row and column offsets
+        func getRowOffset(row: Int) -> CGFloat {
+            let row = CGFloat(row)
+            
+            return round(gridBounds.top + row * gridSpacing) + strokeCorrect
+        }
+        
+        func getColumnOffset(column: Int) -> CGFloat {
+            let col = CGFloat(column)
+            
+            return round(gridBounds.left + col * gridSpacing) + strokeCorrect
+        }
+        
+        
         
         //vertical grid lines
         for column in 1..<cols {
-            let col = CGFloat(column)
             
             gridPath.moveToPoint(CGPoint(
-                x: round(left + col * gridSpacing) + strokeCorrect, y: top + gridWidth
+                x: getColumnOffset(column), y: gridBounds.top + gridWidth
             ))
             
             gridPath.addLineToPoint(CGPoint(
-                x: round(left + col * gridSpacing) + strokeCorrect, y: top + gridBounds.height - gridWidth
+                x: getColumnOffset(column), y: gridBounds.top + gridBounds.height - gridWidth
             ))
         }
         
         //horizontal grid lines
-        for r in 1..<rows {
-            let row = CGFloat(r)
+        for row in 1..<rows {
             
             gridPath.moveToPoint(CGPoint(
-                x: left + gridWidth , y: round(top + row * gridSpacing) + strokeCorrect
+                x: gridBounds.left + gridWidth , y: getRowOffset(row)
             ))
             
             gridPath.addLineToPoint(CGPoint(
-                x: left + gridBounds.width - gridWidth, y: round(top + row * gridSpacing) + strokeCorrect
+                x: gridBounds.left + gridBounds.width - gridWidth, y: getRowOffset(row)
             ))
         }
         
@@ -164,11 +177,11 @@ import UIKit
         //cells
         for y in 0..<rows {
             for x in 0..<cols {
-                let xPos = round(left + CGFloat(x) * gridSpacing)
-                let yPos = round(left + CGFloat(y) * gridSpacing)
+                let xPos = getColumnOffset(x)
+                let yPos = getRowOffset(y)
             
-                let width = round(left + CGFloat(x+1) * gridSpacing) - xPos
-                let height = round(top + CGFloat(y+1) * gridSpacing) - yPos
+                let width = getColumnOffset(x+1) - xPos
+                let height = getRowOffset(y+1) - yPos
                 
                 let cellRect = CGRect(x: xPos + gridWidth / 2, y: yPos + gridWidth / 2,
                                       width: width - gridWidth, height: height - gridWidth)

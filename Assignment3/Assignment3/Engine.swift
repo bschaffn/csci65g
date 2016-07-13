@@ -47,6 +47,23 @@ enum CellState: String {
     
 }
 
+// utility for bounding arrays
+func clamp(value: Int, min: Int? = nil, max: Int? = nil) -> Int {
+    if let minValue = min {
+        if minValue > value {
+            return minValue
+        }
+    }
+    
+    if let maxValue = max {
+        if value >= max {
+            return maxValue - 1
+        }
+    }
+    
+    return value
+}
+
 //CustomStringConvertible makes the new World type play nicely with print()
 struct World: CustomStringConvertible {
     var data: Array<Array<CellState>>
@@ -54,9 +71,11 @@ struct World: CustomStringConvertible {
     let ySize: Int
     
     init(rows: Int, cols: Int){
+        self.xSize = clamp(cols, min: 1)
+        self.ySize = clamp(rows, min: 1)
+        
         self.data = [Array<CellState>](count: rows, repeatedValue: [CellState](count: cols, repeatedValue: .Empty))
-        self.xSize = cols
-        self.ySize = rows
+        
     }
     
     var count: Int {
@@ -90,19 +109,6 @@ struct World: CustomStringConvertible {
             
             return desc
         }
-    }
-    
-    // utility for bounding arrays
-    func clamp(value: Int, min: Int, max: Int) -> Int {
-        if value < min {
-            return min
-        }
-        
-        if value >= max {
-            return max - 1
-        }
-        
-        return value
     }
     
     subscript(x: Int, y: Int) -> CellState {
