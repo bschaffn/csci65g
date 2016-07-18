@@ -11,10 +11,8 @@ import UIKit
 @IBDesignable class GridView: UIView {
     typealias GridBounds = (left: CGFloat, top: CGFloat, width: CGFloat, height: CGFloat)
     
-    @IBInspectable var rows: Int = 20
-        
-    
-    @IBInspectable var cols: Int = 20
+    var rows: Int = 20
+    var cols: Int = 20
 
     
     @IBInspectable var livingColor: UIColor = UIColor.whiteColor()
@@ -71,13 +69,15 @@ import UIKit
     func getCellAtPoint(point: CGPoint) -> CellState {
         let (x, y) = getNearestIndex(point: point)
         
-        return simulationEngine.grid[x,y]
+        return grid[x,y]
     }
     
     func setCellAtPoint(point: CGPoint, state: CellState) {
         let (x, y) = getNearestIndex(point: point)
         
-        //grid[x,y] = state
+        grid[x,y] = state
+        
+        StandardEngine.singletonInstance.delegate!.engineDidUpdate(grid)
         
         self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
     }
@@ -85,13 +85,20 @@ import UIKit
     func toggleCellAtPoint(point: CGPoint) {
         let (x, y) = getNearestIndex(point: point)
         
-        //grid[x,y] = grid[x,y].toggle()
+        grid[x,y] = grid[x,y].toggle()
+        
+        StandardEngine.singletonInstance.delegate!.engineDidUpdate(grid)
         
         self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
     }
     
     
-    var simulationEngine : EngineProtocol
+    var grid: GridProtocol {
+        didSet {
+            rows = grid.rows
+            cols = grid.cols
+        }
+    }
     
     // both are required for interface builder to not crash
     // i could have set a default value for grid to not have to implement these
@@ -99,14 +106,14 @@ import UIKit
     
     // contentMode.Redraw tells ios to redraw everything on resize
     required init?(coder aDecoder: NSCoder) {
-        simulationEngine = StandardEngine(rows: rows, cols: cols)
+        grid = StandardEngine.singletonInstance.grid
         
         super.init(coder: aDecoder)
         contentMode = .Redraw
     }
     
     override init(frame: CGRect) {
-        simulationEngine = StandardEngine(rows: rows, cols: cols)
+        grid = StandardEngine.singletonInstance.grid
         
         super.init(frame: frame)
         contentMode = .Redraw
@@ -138,6 +145,11 @@ import UIKit
             return round(gridBounds.left + col * gridSpacing) + strokeCorrect
         }
         
+        //white bg
+        let bgPath = UIBezierPath(rect: CGRect(x: gridBounds.left, y: gridBounds.top, width: gridBounds.width, height: gridBounds.height))
+        
+        UIColor.whiteColor().setFill()
+        bgPath.fill()
         
         
         //vertical grid lines
@@ -181,7 +193,7 @@ import UIKit
                 
                 let cellPath = UIBezierPath(ovalInRect: cellRect)
                 
-                switch simulationEngine.grid[x, y] {
+                switch grid[x, y] {
                 case .Empty:
                     emptyColor.setFill()
                 case .Born:

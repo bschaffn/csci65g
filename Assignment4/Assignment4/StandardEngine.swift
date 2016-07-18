@@ -77,25 +77,45 @@ class StandardEngine: EngineProtocol {
     var grid: GridProtocol
     
     required init(rows: Int = 10, cols: Int = 10) {
-        grid = Grid(rows, cols)
+        grid = Grid(rows: rows, cols: cols)
         
         self.rows = grid.rows
         self.cols = grid.cols
+        
+        delegate = nil
+        refreshTimer = nil
     }
     
-    var refreshRate: Double
-    var refreshTimer: NSTimer
+    var refreshTimer: NSTimer?
+    var refreshRate: Double = 0.0 {
+        didSet {
+            if refreshRate != 0 {
+                if let timer = refreshTimer {
+                    timer.invalidate()
+                }
+                let sel = #selector(StandardEngine.timerDidFire(_:))
+                
+                refreshTimer = NSTimer.scheduledTimerWithTimeInterval( 1 / refreshRate, target: self, selector: sel,
+                userInfo: nil,
+                repeats: true)
+            }
+            else if let timer = refreshTimer {
+                timer.invalidate()
+                self.refreshTimer = nil
+            }
+        }
+    }
     
-    static func step(prev prev: GridProtocol) -> GridProtocol {
-        var next: GridProtocol = Grid(rows: prev.rows, cols: prev.cols)
+    func step() -> GridProtocol {
+        var next: GridProtocol = Grid(rows: rows, cols: cols)
         
-        for y in 0..<prev.rows {
-            for x in 0..<prev.cols {
-                let neighborCount = prev.neighbors((y, x)).map({
-                    (y, x) in prev[x, y].isAlive() ? 1 : 0
+        for y in 0..<grid.rows {
+            for x in 0..<grid.cols {
+                let neighborCount = grid.neighbors((y, x)).map({
+                    (y, x) in grid[x, y].isAlive() ? 1 : 0
                 }).reduce(0, combine: +)
                 
-                switch (prev[x, y].isAlive(), neighborCount) {
+                switch (grid[x, y].isAlive(), neighborCount) {
                 case (true, 2), (true, 3):
                     next[x, y] = .Living
                 case (false, 3):
@@ -108,10 +128,18 @@ class StandardEngine: EngineProtocol {
             }
         }
         
-        var center = NSNotificationCenter.defaultCenter()
-        center.postNotificationName("GridStepped", object: nil, userInfo: ["grid": next])
-        
         return next
+    }
+    
+    @objc func timerDidFire(timer:NSTimer) {
+        let next = step()
+        delegate!.engineDidUpdate(next)
+        
+        let center = NSNotificationCenter.defaultCenter()
+        let n = NSNotification(name: "ExampleNotification",
+                               object: nil,
+                               userInfo: ["grid": next])
+        center.postNotification(n)
     }
     
 }

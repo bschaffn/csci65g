@@ -25,28 +25,28 @@ func clamp(value: Int, min: Int? = nil, max: Int? = nil) -> Int {
     return value
 }
 
-class Grid: GridProtocol, CustomStringConvertable {
+class Grid: GridProtocol, CustomStringConvertible {
     
     //required for GridProtocol compliance
     var rows: Int
     var cols: Int
     
-    var data = Array<Array<CellState>>
+    var data: Array<Array<CellState>>
     
-    init(rows: Int, cols: Int) {
-        rows = clamp(rows, min: 1)
-        cols = clamp(cols, min: 1)
+    required init(rows: Int, cols: Int) {
+        self.rows = clamp(rows, min: 1)
+        self.cols = clamp(cols, min: 1)
         
         data = [Array<CellState>](count: rows, repeatedValue: [CellState](count: cols, repeatedValue: .Empty))
     }
     
     subscript(x: Int, y: Int) -> CellState {
         get {
-            return data[clamp(y, min: 0, max: ySize)][clamp(x, min:0, max: xSize)]
+            return data[clamp(y, min: 0, max: rows)][clamp(x, min:0, max: cols)]
         }
         
         set(cellValue) {
-            data[clamp(y, min: 0, max: ySize)][clamp(x, min:0, max: xSize)] = cellValue
+            data[clamp(y, min: 0, max: rows)][clamp(x, min:0, max: cols)] = cellValue
         }
     }
     
@@ -67,7 +67,7 @@ class Grid: GridProtocol, CustomStringConvertable {
         ]
         
         return neighborList.map { (row, column) in
-            ((row + rows) % ySize, (column + cols) % xSize)
+            ((row + rows) % rows, (column + cols) % cols)
         }
     }
     
