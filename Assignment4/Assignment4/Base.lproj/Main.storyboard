@@ -176,7 +176,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Instrumentation" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Instrumentation" image="settings" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -207,7 +207,7 @@
                             <constraint firstItem="NXE-qZ-oDw" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="ik7-h4-DHZ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Simulation" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Simulation" image="sim" id="cPa-gy-q4n"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -319,7 +319,7 @@
                             <constraint firstItem="xII-Rl-STY" firstAttribute="top" secondItem="YfG-40-iEf" secondAttribute="top" id="w1a-Ev-L7K"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Statistics" id="N1x-v9-bG4"/>
+                    <tabBarItem key="tabBarItem" title="Statistics" image="statistics" id="N1x-v9-bG4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IxG-4N-8qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -347,7 +347,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
+        <image name="sim" width="30" height="30"/>
+        <image name="statistics" width="30" height="30"/>
     </resources>
 </document>
