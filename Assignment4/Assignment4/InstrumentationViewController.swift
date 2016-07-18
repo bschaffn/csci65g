@@ -26,7 +26,7 @@ class InstrumentationViewController: UIViewController {
             let center = NSNotificationCenter.defaultCenter()
             let n = NSNotification(name: "GridChanged",
                                    object: nil,
-                                   userInfo: ["speed": 0])
+                                   userInfo: ["speed": simSpeed.value])
             center.postNotification(n)
         }
     }

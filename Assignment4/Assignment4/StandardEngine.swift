@@ -107,7 +107,7 @@ class StandardEngine: EngineProtocol {
     }
     
     func step() -> GridProtocol {
-        var next: GridProtocol = Grid(rows: rows, cols: cols)
+        let next: GridProtocol = Grid(rows: rows, cols: cols)
         
         for y in 0..<grid.rows {
             for x in 0..<grid.cols {
@@ -136,7 +136,7 @@ class StandardEngine: EngineProtocol {
         delegate!.engineDidUpdate(next)
         
         let center = NSNotificationCenter.defaultCenter()
-        let n = NSNotification(name: "ExampleNotification",
+        let n = NSNotification(name: "GridChanged",
                                object: nil,
                                userInfo: ["grid": next])
         center.postNotification(n)

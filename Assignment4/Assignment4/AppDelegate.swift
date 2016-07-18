@@ -5,6 +5,9 @@
 //  Created by tinaun on 7/15/16.
 //  Copyright © 2016 tinaun. All rights reserved.
 //
+//  tab icons are made by me
+//  main logo copyright 2014 evan dahm liscenced under a creative commons attribution non-commercial share-alike liscence
+//
 
 import UIKit
 

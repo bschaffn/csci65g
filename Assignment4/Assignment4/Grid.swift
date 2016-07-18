@@ -71,7 +71,7 @@ class Grid: GridProtocol, CustomStringConvertible {
         }
     }
     
-    //utility functions to make life easier
+    //utility functions to make life easier never used haha!
     var count: Int {
         get {
             return self.data.reduce(0) {

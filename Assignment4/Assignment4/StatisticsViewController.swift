@@ -10,8 +10,18 @@ import UIKit
 
 class StatisticsViewController: UIViewController {
 
+    
+    @IBOutlet weak var aliveCells: UILabel!
+    @IBOutlet weak var bornCells: UILabel!
+    @IBOutlet weak var deadCells: UILabel!
+    @IBOutlet weak var emptyCells: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let sel = #selector(StatisticsViewController.watchForNotifications(_:))
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: sel, name: "GridChanged", object: nil)
 
         // Do any additional setup after loading the view.
     }
@@ -21,15 +31,38 @@ class StatisticsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func watchForNotifications(notification: NSNotification) {
+        print("notification recieved \(notification)")
+        
+        if let grid = notification.userInfo!["grid"] {
+            let realGrid = grid as! GridProtocol
+            
+            var (a, b, c, d) = (0, 0, 0, 0)
+            
+            for y in 0..<realGrid.rows {
+                for x in 0..<realGrid.cols {
+                    switch realGrid[x, y] {
+                    case .Living:
+                        a += 1
+                    case .Born:
+                        b += 1
+                    case .Died:
+                        c += 1
+                    case .Empty:
+                        d += 1
+                    }
+                }
+            }
+            
+            
+            aliveCells.text = String(a)
+            bornCells.text = String(b)
+            deadCells.text = String(c)
+            emptyCells.text = String(d)
+        }
     }
-    */
+    
+
+    
 
 }
