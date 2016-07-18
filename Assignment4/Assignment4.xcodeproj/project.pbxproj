@@ -17,6 +17,9 @@
 		7D2C2F931D3D3AA700299EE2 /* GridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C2F921D3D3AA700299EE2 /* GridProtocol.swift */; };
 		7D2C2F951D3D3C8300299EE2 /* EngineDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C2F941D3D3C8300299EE2 /* EngineDelegateProtocol.swift */; };
 		7D2C2F971D3D3D0600299EE2 /* EngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C2F961D3D3D0600299EE2 /* EngineProtocol.swift */; };
+		7D2C2F9A1D3D40BE00299EE2 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C2F981D3D40BE00299EE2 /* GridView.swift */; };
+		7D2C2F9B1D3D40BE00299EE2 /* StandardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C2F991D3D40BE00299EE2 /* StandardEngine.swift */; };
+		7D2C2F9D1D3D415100299EE2 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2C2F9C1D3D415100299EE2 /* Grid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		7D2C2F921D3D3AA700299EE2 /* GridProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridProtocol.swift; sourceTree = "<group>"; };
 		7D2C2F941D3D3C8300299EE2 /* EngineDelegateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDelegateProtocol.swift; sourceTree = "<group>"; };
 		7D2C2F961D3D3D0600299EE2 /* EngineProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineProtocol.swift; sourceTree = "<group>"; };
+		7D2C2F981D3D40BE00299EE2 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		7D2C2F991D3D40BE00299EE2 /* StandardEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardEngine.swift; sourceTree = "<group>"; };
+		7D2C2F9C1D3D415100299EE2 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,9 @@
 		7D2C2F771D397FC300299EE2 /* Assignment4 */ = {
 			isa = PBXGroup;
 			children = (
+				7D2C2F981D3D40BE00299EE2 /* GridView.swift */,
+				7D2C2F991D3D40BE00299EE2 /* StandardEngine.swift */,
+				7D2C2F9C1D3D415100299EE2 /* Grid.swift */,
 				7D2C2F8E1D3CDE4300299EE2 /* InstrumentationViewController.swift */,
 				7D2C2F8F1D3CDE4300299EE2 /* SimulationViewController.swift */,
 				7D2C2F781D397FC300299EE2 /* AppDelegate.swift */,
@@ -152,10 +161,13 @@
 			files = (
 				7D2C2F791D397FC300299EE2 /* AppDelegate.swift in Sources */,
 				7D2C2F911D3CDE4300299EE2 /* SimulationViewController.swift in Sources */,
+				7D2C2F9A1D3D40BE00299EE2 /* GridView.swift in Sources */,
 				7D2C2F951D3D3C8300299EE2 /* EngineDelegateProtocol.swift in Sources */,
 				7D2C2F8D1D3CDD1E00299EE2 /* StatisticsViewController.swift in Sources */,
+				7D2C2F9D1D3D415100299EE2 /* Grid.swift in Sources */,
 				7D2C2F931D3D3AA700299EE2 /* GridProtocol.swift in Sources */,
 				7D2C2F971D3D3D0600299EE2 /* EngineProtocol.swift in Sources */,
+				7D2C2F9B1D3D40BE00299EE2 /* StandardEngine.swift in Sources */,
 				7D2C2F901D3CDE4300299EE2 /* InstrumentationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
