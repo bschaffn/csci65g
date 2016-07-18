@@ -47,40 +47,51 @@ enum CellState: String {
     
 }
 
-struct StandardEngine: EngineProtocol {
+class StandardEngine: EngineProtocol {
     
-    var delegate: EngineDelegate
+    private static var _instance = StandardEngine()
+    static var singletonInstance: StandardEngine {
+        get {
+            return _instance
+        }
+    }
+    
+    var delegate: EngineDelegate?
     
     var rows: Int {
         didSet {
-            grid = Grid(rows: rows, cols: cols)
+            if let d = delegate {
+                d.engineDidUpdate( Grid(rows: rows, cols: cols) )
+            }
         }
     }
     
     var cols: Int {
         didSet {
-            grid = Grid(rows: rows, cols: cols)
+            if let d = delegate {
+                d.engineDidUpdate( Grid(rows: rows, cols: cols) )
+            }
         }
     }
     
     var grid: GridProtocol
     
-    init(rows: Int, cols: Int) {
+    required init(rows: Int = 10, cols: Int = 10) {
         grid = Grid(rows, cols)
         
-        rows = grid.rows
-        cols = grid.cols
+        self.rows = grid.rows
+        self.cols = grid.cols
     }
     
     var refreshRate: Double
     var refreshTimer: NSTimer
     
     static func step(prev prev: GridProtocol) -> GridProtocol {
-        var next = Grid(rows: prev.rows, cols: prev.cols)
+        var next: GridProtocol = Grid(rows: prev.rows, cols: prev.cols)
         
         for y in 0..<prev.rows {
             for x in 0..<prev.cols {
-                let neighborCount = prev.neighbors(y, x).map({
+                let neighborCount = prev.neighbors((y, x)).map({
                     (y, x) in prev[x, y].isAlive() ? 1 : 0
                 }).reduce(0, combine: +)
                 
@@ -96,6 +107,9 @@ struct StandardEngine: EngineProtocol {
                 }
             }
         }
+        
+        var center = NSNotificationCenter.defaultCenter()
+        center.postNotificationName("GridStepped", object: nil, userInfo: ["grid": next])
         
         return next
     }

@@ -10,7 +10,7 @@ import Foundation
 
 typealias GridCoordinate = (row: Int, col: Int)
 
-protocol GridProtocol {
+protocol GridProtocol: AnyObject {
     init( rows: Int, cols: Int )
     var rows: Int { get }
     var cols: Int { get }

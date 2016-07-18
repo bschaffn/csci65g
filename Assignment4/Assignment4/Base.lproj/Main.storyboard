@@ -198,13 +198,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" red="0.89401572942733765" green="0.34975969791412354" blue="0.91652566194534302" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhK-or-IUt">
+                                <rect key="frame" x="20" y="20" width="560" height="531"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xX-Zm-s4a" customClass="GridView" customModule="Assignment4" customModuleProvider="target">
+                                        <rect key="frame" x="56" y="53" width="448" height="425"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="4xX-Zm-s4a" firstAttribute="centerX" secondItem="rhK-or-IUt" secondAttribute="centerX" id="9H6-Gr-YbG"/>
+                                    <constraint firstItem="4xX-Zm-s4a" firstAttribute="height" secondItem="rhK-or-IUt" secondAttribute="height" multiplier="0.8" id="AFn-kR-4lj"/>
+                                    <constraint firstItem="4xX-Zm-s4a" firstAttribute="width" secondItem="rhK-or-IUt" secondAttribute="width" multiplier="0.8" id="pvM-8o-Qxl"/>
+                                    <constraint firstItem="4xX-Zm-s4a" firstAttribute="centerY" secondItem="rhK-or-IUt" secondAttribute="centerY" id="wY9-Gm-gzg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="NXE-qZ-oDw" secondAttribute="bottom" id="454-gW-QTR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rhK-or-IUt" secondAttribute="trailing" id="EeB-HQ-FrG"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="rhK-or-IUt" secondAttribute="bottom" id="IdL-gr-bQ0"/>
                             <constraint firstItem="NXE-qZ-oDw" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="MBf-Gu-l8Z"/>
+                            <constraint firstItem="rhK-or-IUt" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="QOc-Af-Ruc"/>
                             <constraint firstAttribute="trailing" secondItem="NXE-qZ-oDw" secondAttribute="trailing" id="UMd-Lu-rPz"/>
                             <constraint firstItem="NXE-qZ-oDw" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="ik7-h4-DHZ"/>
+                            <constraint firstItem="rhK-or-IUt" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="mli-dV-aWl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Simulation" image="sim" id="cPa-gy-q4n"/>

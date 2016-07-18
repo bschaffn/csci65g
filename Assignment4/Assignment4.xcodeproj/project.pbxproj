@@ -70,20 +70,20 @@
 		7D2C2F771D397FC300299EE2 /* Assignment4 */ = {
 			isa = PBXGroup;
 			children = (
-				7D2C2F981D3D40BE00299EE2 /* GridView.swift */,
-				7D2C2F991D3D40BE00299EE2 /* StandardEngine.swift */,
-				7D2C2F9C1D3D415100299EE2 /* Grid.swift */,
-				7D2C2F8E1D3CDE4300299EE2 /* InstrumentationViewController.swift */,
-				7D2C2F8F1D3CDE4300299EE2 /* SimulationViewController.swift */,
 				7D2C2F781D397FC300299EE2 /* AppDelegate.swift */,
-				7D2C2F8C1D3CDD1E00299EE2 /* StatisticsViewController.swift */,
-				7D2C2F7E1D397FC300299EE2 /* Main.storyboard */,
-				7D2C2F921D3D3AA700299EE2 /* GridProtocol.swift */,
+				7D2C2F811D397FC400299EE2 /* Assets.xcassets */,
 				7D2C2F941D3D3C8300299EE2 /* EngineDelegateProtocol.swift */,
 				7D2C2F961D3D3D0600299EE2 /* EngineProtocol.swift */,
-				7D2C2F811D397FC400299EE2 /* Assets.xcassets */,
-				7D2C2F831D397FC400299EE2 /* LaunchScreen.storyboard */,
+				7D2C2F9C1D3D415100299EE2 /* Grid.swift */,
+				7D2C2F921D3D3AA700299EE2 /* GridProtocol.swift */,
+				7D2C2F981D3D40BE00299EE2 /* GridView.swift */,
 				7D2C2F861D397FC400299EE2 /* Info.plist */,
+				7D2C2F8E1D3CDE4300299EE2 /* InstrumentationViewController.swift */,
+				7D2C2F831D397FC400299EE2 /* LaunchScreen.storyboard */,
+				7D2C2F7E1D397FC300299EE2 /* Main.storyboard */,
+				7D2C2F8F1D3CDE4300299EE2 /* SimulationViewController.swift */,
+				7D2C2F991D3D40BE00299EE2 /* StandardEngine.swift */,
+				7D2C2F8C1D3CDD1E00299EE2 /* StatisticsViewController.swift */,
 			);
 			path = Assignment4;
 			sourceTree = "<group>";
