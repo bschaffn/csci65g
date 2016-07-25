@@ -92,6 +92,8 @@ class InstrumentationViewController: UIViewController {
         if let number = Int(sender.text!) {
             rows = number
         }
+        
+        sender.endEditing(true)
     }
     
     
@@ -103,6 +105,8 @@ class InstrumentationViewController: UIViewController {
         if let number = Int(sender.text!) {
             cols = number
         }
+        
+        sender.endEditing(true)
     }
 
 }
