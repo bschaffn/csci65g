@@ -21,14 +21,21 @@ class SimulationViewController: UIViewController, EngineDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController!.setToolbarHidden(true, animated: false)
+        self.navigationController!.setNavigationBarHidden(true, animated: false)
         
         engine = StandardEngine.singletonInstance
         engine.delegate = self
         
+        engine.rows = 20
+        engine.cols = 20
+        
         let sel = #selector(SimulationViewController.watchForNotifications(_:))
         let center = NSNotificationCenter.defaultCenter()
         center.addObserver(self, selector: sel, name: "GridChanged", object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController!.setNavigationBarHidden(true, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +50,10 @@ class SimulationViewController: UIViewController, EngineDelegate {
         
         if let speed = notification.userInfo!["speed"] {
             engine.refreshRate = speed as! Double
+        }
+        
+        if let rule = notification.userInfo!["rule"] {
+            engine.rule = LifeRule(ruleString: rule as! String)!
         }
     }
     
@@ -90,6 +101,19 @@ class SimulationViewController: UIViewController, EngineDelegate {
             ()
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let rlePattern = segue.destinationViewController as? LoaderViewController
+            else {
+                preconditionFailure("incorrect view controller")
+        }
+        
+        rlePattern.commit = { (pattern) in
+            
+        }
+    }
+    
+    
 
 }
 

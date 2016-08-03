@@ -92,11 +92,12 @@ import UIKit
         self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
     }
     
-    
     var grid: GridProtocol {
         didSet {
             rows = grid.rows
             cols = grid.cols
+            
+            self.setNeedsDisplay()
         }
     }
     

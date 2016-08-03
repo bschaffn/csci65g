@@ -49,10 +49,15 @@ enum CellState: String {
 
 class StandardEngine: EngineProtocol {
     
-    private static var _instance = StandardEngine()
+    private static var _instance: StandardEngine?
     static var singletonInstance: StandardEngine {
         get {
-            return _instance
+            if let i = _instance {
+                return i;
+            } else {
+                _instance = StandardEngine()
+                return _instance!
+            }
         }
     }
     
@@ -74,10 +79,12 @@ class StandardEngine: EngineProtocol {
         }
     }
     
+    var rule: LifeRule
     var grid: GridProtocol
     
     required init(rows: Int = 10, cols: Int = 10) {
         grid = Grid(rows: rows, cols: cols)
+        rule = LifeRule.StandardLife()
         
         self.rows = grid.rows
         self.cols = grid.cols
@@ -116,9 +123,9 @@ class StandardEngine: EngineProtocol {
                 }).reduce(0, combine: +)
                 
                 switch (grid[x, y].isAlive(), neighborCount) {
-                case (true, 2), (true, 3):
+                case (true, let t) where rule.stay[t] == true:
                     next[x, y] = .Living
-                case (false, 3):
+                case (false, let t) where rule.born[t] == true:
                     next[x, y] = .Born
                 case (true, _):
                     next[x, y] = .Died

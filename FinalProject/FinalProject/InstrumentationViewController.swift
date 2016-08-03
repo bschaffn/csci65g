@@ -41,6 +41,13 @@ class InstrumentationViewController: UIViewController, UIPickerViewDelegate, UIP
             let point = sender.locationInView(ruleEditor)
             let change = ruleEditor.updateRuleWithPoint(point)
             
+            let str = ruleEditor.rule.description
+            let center = NSNotificationCenter.defaultCenter()
+            let n = NSNotification(name: "GridChanged",
+                                   object: nil,
+                                   userInfo: ["rule": str])
+            center.postNotification(n)
+            
             ruleEditor.setNeedsDisplayInRect(change)
             
             if ruleNames.contains(ruleEditor.rule.getName()) {
@@ -62,6 +69,15 @@ class InstrumentationViewController: UIViewController, UIPickerViewDelegate, UIP
             if v == ruleNames[row] {
                 ruleEditor.rule = LifeRule(ruleString: k)!
                 ruleEditor.setNeedsDisplay()
+                
+                let str = ruleEditor.rule.description
+                let center = NSNotificationCenter.defaultCenter()
+                let n = NSNotification(name: "GridChanged",
+                                       object: nil,
+                                       userInfo: ["rule": str])
+                center.postNotification(n)
+                
+                
                 break
             }
         }

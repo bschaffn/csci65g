@@ -9,23 +9,50 @@
 import UIKit
 
 class LoaderViewController: UIViewController {
-
+    var pattern: Pattern?
+    var commit: (Pattern -> Void)?
+    
+    
     @IBOutlet weak var previewFile: UIButton!
     @IBOutlet weak var patternURL: UITextField!
     @IBOutlet weak var patternData: UITextView!
+    @IBOutlet weak var patternGrid: GridView!
+    @IBOutlet weak var loadButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController!.setToolbarHidden(false, animated: true)
+        self.navigationController!.setNavigationBarHidden(false, animated: true)
         
         patternURL.text = "http://www.conwaylife.com/patterns/gardenofeden1.rle"
+        patternGrid.grid = Grid(rows: 1, cols: 1)
         
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func loadPattern(sender: AnyObject) {
+        if let commit = commit {
+            self.fetchRLE(self)
+            if let pattern = self.pattern {
+                commit(pattern)
+                
+                navigationController?.popViewControllerAnimated(true)
+            } else {
+                let alert = UIAlertController(title: "Invalid", message: "File is not readable as RLE", preferredStyle: .Alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                    
+                    }
+                    
+                alert.addAction(defaultAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func fetchRLE(sender: AnyObject) {
@@ -40,10 +67,15 @@ class LoaderViewController: UIViewController {
                 fetcher.requestRLE(url) { (rle, message) in
                     let op = NSBlockOperation {
                         if let rle = rle {
-                            var text = rle.data.description
-                            text += "\n \(rle.metadata.name)\n"
+                            self.patternGrid.grid = rle.data
+                            
+                            self.pattern = rle
+                            
+                            var text = "\(rle.metadata.name)\n"
                             text += "\n \(rle.metadata.owner)\n"
-                            text += "\n \(rle.metadata.comments)\n"
+                            let _ = rle.metadata.comments.map {
+                                text += "\($0)\n"
+                            }
                             
                             self.patternData.text = text
                         } else if let message = message {

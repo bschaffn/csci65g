@@ -13,6 +13,7 @@ protocol EngineProtocol {
     
     var delegate: EngineDelegate? { get set }
     var grid: GridProtocol { get }
+    var rule: LifeRule { get set }
     
     var refreshRate: Double { get set }
     var refreshTimer: NSTimer? { get set }

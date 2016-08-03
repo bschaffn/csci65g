@@ -82,6 +82,32 @@ class Grid: GridProtocol, CustomStringConvertible {
         }
     }
     
+    var points: [GridCoordinate] {
+        get {
+            //swifts collection types really should have a filterMap, wouldn't have use ?s
+            
+            let points:[GridCoordinate?] = self.data.enumerate().flatMap { (y, arr) in
+                return arr.enumerate().map { (x: Int, val: CellState) -> GridCoordinate? in
+                    val.isAlive() ? (row: x, col: y) : nil
+                }
+            }
+            
+            return points.filter { $0 != nil } as! [GridCoordinate]
+        }
+        
+        set (points) {
+            data = [Array<CellState>](count: rows, repeatedValue: [CellState](count: cols, repeatedValue: .Empty))
+            
+            let _ = points.map { (point) in
+                self[point.row, point.col] = .Living
+            }
+        }
+    }
+    
+    func clear() {
+        points = []
+    }
+    
     var description: String {
         get {
             var desc = ""

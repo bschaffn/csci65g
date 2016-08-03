@@ -14,6 +14,10 @@ protocol GridProtocol: AnyObject {
     init( rows: Int, cols: Int )
     var rows: Int { get }
     var cols: Int { get }
+    var count: Int { get }
+    var points: [GridCoordinate] { get set }
+    
+    func clear()
     
     func neighbors( point: GridCoordinate ) -> Array<GridCoordinate>
     

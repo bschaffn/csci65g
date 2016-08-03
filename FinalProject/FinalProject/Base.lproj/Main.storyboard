@@ -175,6 +175,21 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hQ-9s-C1F" customClass="GridView" customModule="FinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="441"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="livingColor">
+                                                <color key="value" red="0.42571717500686646" green="0.90932559967041016" blue="0.47280031442642212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="bornColor">
+                                                <color key="value" red="0.42571717500686646" green="0.90932559967041016" blue="0.47280031442642212" alpha="0.59652039010000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="diedColor">
+                                                <color key="value" white="0.33333333329999998" alpha="0.60009419330000002" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="vnW-09-fMG" appends="YES" id="iNT-AT-sCv"/>
+                                            <outletCollection property="gestureRecognizers" destination="Ae5-96-eZW" appends="YES" id="86z-wC-lz8"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -255,7 +270,7 @@
             </objects>
             <point key="canvasLocation" x="378" y="839"/>
         </scene>
-        <!--Loader View Controller-->
+        <!--Load RLE Pattern-->
         <scene sceneID="nLm-oQ-hxY">
             <objects>
                 <viewController id="9g1-eM-NiG" customClass="LoaderViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -267,6 +282,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-Dp-4UX">
+                                <rect key="frame" x="20" y="72" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyS-bO-IXh">
                                 <rect key="frame" x="20" y="110" width="54" height="30"/>
                                 <constraints>
@@ -279,36 +299,63 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FW2-Ks-pjJ">
-                                <rect key="frame" x="20" y="148" width="560" height="395"/>
+                                <rect key="frame" x="20" y="321" width="560" height="227"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="227" id="3pQ-FK-I7z"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kwj-Dp-4UX">
-                                <rect key="frame" x="20" y="72" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWh-4d-Wu3" customClass="GridView" customModule="FinalProject" customModuleProvider="target">
+                                <rect key="frame" x="82" y="110" width="498" height="203"/>
+                                <color key="backgroundColor" red="0.99613708257675171" green="0.99588876962661743" blue="0.99227458238601685" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="livingColor">
+                                        <color key="value" red="0.42571717500686646" green="0.90932559967041016" blue="0.47280031442642212" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gridColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gridWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94674009084701538" green="0.94920331239700317" blue="0.79217660427093506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="FW2-Ks-pjJ" firstAttribute="top" secondItem="cyS-bO-IXh" secondAttribute="bottom" constant="8" id="3st-3M-NWA"/>
-                            <constraint firstItem="FW2-Ks-pjJ" firstAttribute="top" secondItem="cyS-bO-IXh" secondAttribute="bottom" constant="8" id="5MD-1k-byG"/>
                             <constraint firstItem="FW2-Ks-pjJ" firstAttribute="trailing" secondItem="HpJ-TP-zU0" secondAttribute="trailingMargin" id="6KC-ta-HbD"/>
                             <constraint firstItem="cyS-bO-IXh" firstAttribute="top" secondItem="HpJ-TP-zU0" secondAttribute="top" constant="110" id="EIP-cv-wjR"/>
+                            <constraint firstItem="QWh-4d-Wu3" firstAttribute="top" secondItem="kwj-Dp-4UX" secondAttribute="bottom" constant="8" id="Eey-CI-R1A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QWh-4d-Wu3" secondAttribute="trailing" id="GHP-DB-f8x"/>
                             <constraint firstItem="kwj-Dp-4UX" firstAttribute="trailing" secondItem="HpJ-TP-zU0" secondAttribute="trailingMargin" id="GNe-ma-7hd"/>
                             <constraint firstItem="FW2-Ks-pjJ" firstAttribute="leading" secondItem="HpJ-TP-zU0" secondAttribute="leadingMargin" id="aaK-cX-9S9"/>
+                            <constraint firstItem="FW2-Ks-pjJ" firstAttribute="top" secondItem="QWh-4d-Wu3" secondAttribute="bottom" constant="8" id="agS-xv-mbI"/>
                             <constraint firstItem="cyS-bO-IXh" firstAttribute="leading" secondItem="HpJ-TP-zU0" secondAttribute="leadingMargin" id="cpF-4w-wTO"/>
+                            <constraint firstItem="QWh-4d-Wu3" firstAttribute="leading" secondItem="cyS-bO-IXh" secondAttribute="trailing" constant="8" id="hpc-ZN-LIe"/>
                             <constraint firstItem="cyS-bO-IXh" firstAttribute="top" secondItem="kwj-Dp-4UX" secondAttribute="bottom" constant="8" id="jJt-ax-4kT"/>
                             <constraint firstItem="klb-NA-87H" firstAttribute="top" secondItem="FW2-Ks-pjJ" secondAttribute="bottom" constant="8" id="r2D-C3-FFt"/>
                             <constraint firstItem="FW2-Ks-pjJ" firstAttribute="leading" secondItem="HpJ-TP-zU0" secondAttribute="leadingMargin" id="rAs-OS-iuj"/>
                             <constraint firstItem="FW2-Ks-pjJ" firstAttribute="trailing" secondItem="HpJ-TP-zU0" secondAttribute="trailingMargin" id="rYX-IY-F3f"/>
                             <constraint firstItem="kwj-Dp-4UX" firstAttribute="leading" secondItem="HpJ-TP-zU0" secondAttribute="leadingMargin" id="rk1-GG-rUV"/>
+                            <constraint firstItem="FW2-Ks-pjJ" firstAttribute="top" secondItem="QWh-4d-Wu3" secondAttribute="bottom" constant="8" id="xm7-nb-p4U"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Load RLE Pattern" id="cCU-ig-61d">
+                        <barButtonItem key="rightBarButtonItem" title="Load" id="108-Da-xC6">
+                            <connections>
+                                <action selector="loadPattern:" destination="9g1-eM-NiG" id="WpJ-8d-vtF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="PatternURL" destination="kwj-Dp-4UX" id="eLk-9d-Wur"/>
+                        <outlet property="loadButton" destination="108-Da-xC6" id="Dxj-hX-bIK"/>
                         <outlet property="patternData" destination="FW2-Ks-pjJ" id="X2y-dh-vJa"/>
+                        <outlet property="patternGrid" destination="QWh-4d-Wu3" id="7rw-7u-jeg"/>
                         <outlet property="patternURL" destination="kwj-Dp-4UX" id="NHW-mW-Buy"/>
                         <outlet property="previewFile" destination="cyS-bO-IXh" id="th9-U2-IDu"/>
                     </connections>
