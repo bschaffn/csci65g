@@ -92,6 +92,30 @@ import UIKit
         self.setNeedsDisplayInRect(self.getCellBoundsForIndex(x,y))
     }
     
+    func embed(pattern pattern: Pattern){
+        let padding = 4
+        
+        if pattern.data.rows + padding < rows && pattern.data.cols + padding < cols {
+            grid.clear()
+        } else {
+            let newRows = pattern.data.rows + padding > rows ? pattern.data.rows + padding : rows
+            
+            let newCols = pattern.data.cols + padding > cols ? pattern.data.cols + padding : cols
+            
+            grid = Grid(rows: newRows, cols: newCols)
+        }
+        
+        let startPos = (col: cols/2 + pattern.startPos.0, row: rows/2 + pattern.startPos.1)
+        
+        grid.loadFrom(subGrid: pattern.data, startPos: startPos)
+        
+        let center = NSNotificationCenter.defaultCenter()
+        let n = NSNotification(name: "GridChanged",
+                               object: nil,
+                               userInfo: ["grid": grid])
+        center.postNotification(n)
+    }
+    
     var grid: GridProtocol {
         didSet {
             rows = grid.rows

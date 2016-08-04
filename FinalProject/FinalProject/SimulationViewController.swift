@@ -55,6 +55,10 @@ class SimulationViewController: UIViewController, EngineDelegate {
         if let rule = notification.userInfo!["rule"] {
             engine.rule = LifeRule(ruleString: rule as! String)!
         }
+        
+        if let grid = notification.userInfo!["grid"] {
+            engineDidUpdate( grid as! GridProtocol )
+        }
     }
     
     func engineDidUpdate(withGrid: GridProtocol) {
@@ -72,8 +76,6 @@ class SimulationViewController: UIViewController, EngineDelegate {
         let n = NSNotification(name: "GridChanged", object: nil, userInfo: ["grid": next])
         
         center.postNotification(n)
-        
-        engineDidUpdate(next)
     }
     
     @IBAction func gridViewTap(gesture: UITapGestureRecognizer?) {
@@ -109,7 +111,12 @@ class SimulationViewController: UIViewController, EngineDelegate {
         }
         
         rlePattern.commit = { (pattern) in
+            self.lifeGrid.embed(pattern: pattern)
             
+            let center = NSNotificationCenter.defaultCenter()
+            let n = NSNotification(name: "GridChanged", object: nil, userInfo: ["grid": self.lifeGrid.grid])
+            
+            center.postNotification(n)
         }
     }
     

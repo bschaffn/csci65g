@@ -10,16 +10,53 @@ import UIKit
 
 class ConfigurationViewController: UITableViewController {
 
-    private var names = ["Karkat", "Kanaya", "Vriska"]
+    private var names = ["loading..."]
+    private var initDataURL = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let fetcher = Fetcher()
+        
+        fetcher.requestJSON(initDataURL) { (json, message) in
+            let op = NSBlockOperation {
+                if let json = json as? NSArray {
+                    print(json)
+                    self.names = json.map { (obj) in
+                        obj.title
+                    }
+                    
+                    self.tableView.reloadData()
+                } else {
+                    var errorMessage: String
+                    
+                    if let m = message {
+                        errorMessage = m
+                    } else {
+                        errorMessage = "Invalid JSON Data"
+                    }
+                    
+                    
+                    let alert = UIAlertController(title: "Invalid", message: errorMessage, preferredStyle: .Alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                        
+                    }
+                    
+                    alert.addAction(defaultAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            }
+            
+            NSOperationQueue.mainQueue().addOperation(op)
+        }
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {

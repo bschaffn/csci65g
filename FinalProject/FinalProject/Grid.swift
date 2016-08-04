@@ -51,7 +51,7 @@ class Grid: GridProtocol, CustomStringConvertible {
     }
     
     func neighbors(point: GridCoordinate) -> Array<GridCoordinate> {
-        let (row, column) = point
+        let (column, row) = point
         
         let neighborList = [
             (row + 1, column + 1),
@@ -88,18 +88,18 @@ class Grid: GridProtocol, CustomStringConvertible {
             
             let points:[GridCoordinate?] = self.data.enumerate().flatMap { (y, arr) in
                 return arr.enumerate().map { (x: Int, val: CellState) -> GridCoordinate? in
-                    val.isAlive() ? (row: x, col: y) : nil
+                    val.isAlive() ? (col: x, row: y) : nil
                 }
             }
             
-            return points.filter { $0 != nil } as! [GridCoordinate]
+            return points.flatMap { $0 }
         }
         
         set (points) {
             data = [Array<CellState>](count: rows, repeatedValue: [CellState](count: cols, repeatedValue: .Empty))
             
             let _ = points.map { (point) in
-                self[point.row, point.col] = .Living
+                self[point.col, point.row] = .Living
             }
         }
     }

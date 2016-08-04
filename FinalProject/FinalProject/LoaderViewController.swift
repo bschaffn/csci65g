@@ -23,8 +23,9 @@ class LoaderViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController!.setNavigationBarHidden(false, animated: true)
         
-        patternURL.text = "http://www.conwaylife.com/patterns/gardenofeden1.rle"
+        patternURL.text = "http://www.conwaylife.com/patterns/pulsar.rle"
         patternGrid.grid = Grid(rows: 1, cols: 1)
+        self.loadButton.enabled = false
         
         // Do any additional setup after loading the view.
     }
@@ -37,7 +38,6 @@ class LoaderViewController: UIViewController {
     
     @IBAction func loadPattern(sender: AnyObject) {
         if let commit = commit {
-            self.fetchRLE(self)
             if let pattern = self.pattern {
                 commit(pattern)
                 
@@ -78,6 +78,7 @@ class LoaderViewController: UIViewController {
                             }
                             
                             self.patternData.text = text
+                            self.loadButton.enabled = true
                         } else if let message = message {
                             self.patternData.text = message
                         } else {
@@ -88,7 +89,7 @@ class LoaderViewController: UIViewController {
                     NSOperationQueue.mainQueue().addOperation(op)
                 }
             } else {
-                    
+                patternData.text = "Invalid extension \(path)"
             }
         } else {
             patternData.text = "No Extension!"

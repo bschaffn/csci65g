@@ -118,7 +118,7 @@ class StandardEngine: EngineProtocol {
         
         for y in 0..<grid.rows {
             for x in 0..<grid.cols {
-                let neighborCount = grid.neighbors((y, x)).map({
+                let neighborCount = grid.neighbors((x, y)).map({
                     (y, x) in grid[x, y].isAlive() ? 1 : 0
                 }).reduce(0, combine: +)
                 

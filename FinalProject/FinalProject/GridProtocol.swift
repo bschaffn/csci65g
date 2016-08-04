@@ -8,13 +8,14 @@
 
 import Foundation
 
-typealias GridCoordinate = (row: Int, col: Int)
+typealias GridCoordinate = (col: Int, row: Int)
 
 protocol GridProtocol: AnyObject {
     init( rows: Int, cols: Int )
     var rows: Int { get }
     var cols: Int { get }
     var count: Int { get }
+    
     var points: [GridCoordinate] { get set }
     
     func clear()
@@ -23,4 +24,13 @@ protocol GridProtocol: AnyObject {
     
     subscript(x: Int, y: Int) -> CellState { get set }
 
+}
+
+extension GridProtocol {
+    //subGrid is assumed to be always smaller than self
+    func loadFrom (subGrid subGrid: GridProtocol, startPos: GridCoordinate) {
+        self.points = subGrid.points.map {
+            ($0.col + startPos.col, $0.row + startPos.row)
+        }
+    }
 }
