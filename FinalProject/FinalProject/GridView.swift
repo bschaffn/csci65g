@@ -14,6 +14,7 @@ import UIKit
     var rows: Int = 20
     var cols: Int = 20
 
+    @IBInspectable var compactCells: Bool = false
     
     @IBInspectable var livingColor: UIColor = UIColor.whiteColor()
     
@@ -95,25 +96,15 @@ import UIKit
     func embed(pattern pattern: Pattern){
         let padding = 4
         
-        if pattern.data.rows + padding < rows && pattern.data.cols + padding < cols {
-            grid.clear()
-        } else {
-            let newRows = pattern.data.rows + padding > rows ? pattern.data.rows + padding : rows
-            
-            let newCols = pattern.data.cols + padding > cols ? pattern.data.cols + padding : cols
-            
-            grid = Grid(rows: newRows, cols: newCols)
-        }
+        let newRows = pattern.data.rows + padding > rows ? pattern.data.rows + padding : rows
+        let newCols = pattern.data.cols + padding > cols ? pattern.data.cols + padding : cols
+        
+        LifeGridNotification.resized(rows: newRows, cols: newCols)
         
         let startPos = (col: cols/2 + pattern.startPos.0, row: rows/2 + pattern.startPos.1)
         
         grid.loadFrom(subGrid: pattern.data, startPos: startPos)
-        
-        let center = NSNotificationCenter.defaultCenter()
-        let n = NSNotification(name: "GridChanged",
-                               object: nil,
-                               userInfo: ["grid": grid])
-        center.postNotification(n)
+        LifeGridNotification.gridChanged(grid)
     }
     
     var grid: GridProtocol {
@@ -153,6 +144,9 @@ import UIKit
         if rows <= 0 || cols <= 0 {
             return
         }
+        
+        let compactMode = gridSpacing < 3 || compactCells
+        
         
         // prevents odd line widths from being blurry
         let strokeCorrect: CGFloat = gridWidth % 2 == 0 ? 0 : 0.5
@@ -201,8 +195,10 @@ import UIKit
             ))
         }
         
-        gridColor.setStroke()
-        gridPath.stroke()
+        if !compactMode {
+            gridColor.setStroke()
+            gridPath.stroke()
+        }
         
         //cells
         for y in 0..<rows {
@@ -213,10 +209,17 @@ import UIKit
                 let width = getColumnOffset(x+1) - xPos
                 let height = getRowOffset(y+1) - yPos
                 
-                let cellRect = CGRect(x: xPos + gridWidth / 2, y: yPos + gridWidth / 2,
-                                      width: width - gridWidth, height: height - gridWidth)
+                var cellPath: UIBezierPath
                 
-                let cellPath = UIBezierPath(ovalInRect: cellRect)
+                if compactMode {
+                    let cellRect = CGRect(x: xPos, y: yPos, width: width, height: height)
+                    cellPath = UIBezierPath(rect: cellRect)
+                } else {
+                    let cellRect = CGRect(x: xPos + gridWidth / 2, y: yPos + gridWidth / 2,
+                                          width: width - gridWidth, height: height - gridWidth)
+                
+                    cellPath = UIBezierPath(ovalInRect: cellRect)
+                }
                 
                 switch grid[x, y] {
                 case .Empty:

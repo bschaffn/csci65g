@@ -16,6 +16,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     @IBOutlet weak var nextButton: UIButton!
     
+    var lastUsedRLE: NSURL?
     var heldState: CellState = .Empty
     
     override func viewDidLoad() {
@@ -30,8 +31,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
         engine.cols = 20
         
         let sel = #selector(SimulationViewController.watchForNotifications(_:))
-        let center = NSNotificationCenter.defaultCenter()
-        center.addObserver(self, selector: sel, name: "GridChanged", object: nil)
+        LifeGridNotification.addObserver(self, selector: sel)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -59,6 +59,14 @@ class SimulationViewController: UIViewController, EngineDelegate {
         if let grid = notification.userInfo!["grid"] {
             engineDidUpdate( grid as! GridProtocol )
         }
+        
+        if let rows = notification.userInfo!["rows"] {
+            engine.rows = rows as! Int
+        }
+        
+        if let cols = notification.userInfo!["cols"] {
+            engine.cols = cols as! Int
+        }
     }
     
     func engineDidUpdate(withGrid: GridProtocol) {
@@ -72,10 +80,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
     @IBAction func nextButtonPressed(sender: AnyObject) {
         
         let next = engine.step()
-        let center = NSNotificationCenter.defaultCenter()
-        let n = NSNotification(name: "GridChanged", object: nil, userInfo: ["grid": next])
-        
-        center.postNotification(n)
+        LifeGridNotification.gridChanged(next)
     }
     
     @IBAction func gridViewTap(gesture: UITapGestureRecognizer?) {
@@ -84,7 +89,6 @@ class SimulationViewController: UIViewController, EngineDelegate {
         print(touchPoint!)
         
         lifeGrid.toggleCellAtPoint(touchPoint!)
-        
     }
     
     @IBAction func gridViewDragged(gesture: UIPanGestureRecognizer?) {
@@ -104,19 +108,32 @@ class SimulationViewController: UIViewController, EngineDelegate {
         }
     }
     
+    @IBAction func clearGrid(sender: AnyObject) {
+        lifeGrid.grid.clear()
+        lifeGrid.setNeedsDisplay()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let rlePattern = segue.destinationViewController as? LoaderViewController
             else {
                 preconditionFailure("incorrect view controller")
         }
         
-        rlePattern.commit = { (pattern) in
+        if let url = self.lastUsedRLE {
+            rlePattern.urlForPattern = url
+        } else {
+            rlePattern.urlForPattern = NSURL(string: "http://conwaylife.com/patterns/pulsar.rle")!
+        }
+        
+        rlePattern.commit = { (pattern, url) in
             self.lifeGrid.embed(pattern: pattern)
+            self.lastUsedRLE = url
             
-            let center = NSNotificationCenter.defaultCenter()
-            let n = NSNotification(name: "GridChanged", object: nil, userInfo: ["grid": self.lifeGrid.grid])
+            if let rule = pattern.metadata.ruleString {
+                LifeGridNotification.ruleChanged(rule)
+            }
             
-            center.postNotification(n)
+            LifeGridNotification.gridChanged(self.lifeGrid.grid)
         }
     }
     

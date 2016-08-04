@@ -26,12 +26,34 @@ class InstrumentationViewController: UIViewController, UIPickerViewDelegate, UIP
         rulePicker.dataSource = self
         rulePicker.selectRow(3, inComponent: 0, animated: false)
         
+        let sel = #selector(InstrumentationViewController.watchForNotifications(_:))
+        LifeGridNotification.addObserver(self, selector: sel)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func watchForNotifications(notification: NSNotification) {
+        if let rule = notification.userInfo!["rule"] {
+            let newRule = LifeRule(ruleString: rule as! String)!
+            
+            if ruleNames.contains(newRule.getName()) {
+                let name = ruleNames.indexOf(newRule.getName())!
+                rulePicker.selectRow(Int(name), inComponent: 0, animated: true)
+            } else {
+                rulePicker.selectRow(ruleNames.count - 1, inComponent: 0, animated: true)
+            }
+            
+            //if the rule wasn't already modified by the ruleEditor, refresh it
+            if newRule.description != ruleEditor.rule.description {
+                ruleEditor.rule = newRule
+                ruleEditor.setNeedsDisplay()
+            }
+        }
     }
     
     
@@ -42,20 +64,9 @@ class InstrumentationViewController: UIViewController, UIPickerViewDelegate, UIP
             let change = ruleEditor.updateRuleWithPoint(point)
             
             let str = ruleEditor.rule.description
-            let center = NSNotificationCenter.defaultCenter()
-            let n = NSNotification(name: "GridChanged",
-                                   object: nil,
-                                   userInfo: ["rule": str])
-            center.postNotification(n)
+            LifeGridNotification.ruleChanged(str)
             
             ruleEditor.setNeedsDisplayInRect(change)
-            
-            if ruleNames.contains(ruleEditor.rule.getName()) {
-                let name = ruleNames.indexOf(ruleEditor.rule.getName())!
-                rulePicker.selectRow(Int(name), inComponent: 0, animated: true)
-            } else {
-                rulePicker.selectRow(ruleNames.count - 1, inComponent: 0, animated: true)
-            }
         }
     }
     
@@ -67,17 +78,7 @@ class InstrumentationViewController: UIViewController, UIPickerViewDelegate, UIP
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         for (k, v) in LifeRule.namedRule {
             if v == ruleNames[row] {
-                ruleEditor.rule = LifeRule(ruleString: k)!
-                ruleEditor.setNeedsDisplay()
-                
-                let str = ruleEditor.rule.description
-                let center = NSNotificationCenter.defaultCenter()
-                let n = NSNotification(name: "GridChanged",
-                                       object: nil,
-                                       userInfo: ["rule": str])
-                center.postNotification(n)
-                
-                
+                LifeGridNotification.ruleChanged(k)
                 break
             }
         }

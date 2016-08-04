@@ -10,7 +10,8 @@ import UIKit
 
 class LoaderViewController: UIViewController {
     var pattern: Pattern?
-    var commit: (Pattern -> Void)?
+    var urlForPattern: NSURL?
+    var commit: ((Pattern, NSURL) -> Void)?
     
     
     @IBOutlet weak var previewFile: UIButton!
@@ -23,7 +24,7 @@ class LoaderViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController!.setNavigationBarHidden(false, animated: true)
         
-        patternURL.text = "http://www.conwaylife.com/patterns/pulsar.rle"
+        patternURL.text = urlForPattern!.description
         patternGrid.grid = Grid(rows: 1, cols: 1)
         self.loadButton.enabled = false
         
@@ -39,7 +40,7 @@ class LoaderViewController: UIViewController {
     @IBAction func loadPattern(sender: AnyObject) {
         if let commit = commit {
             if let pattern = self.pattern {
-                commit(pattern)
+                commit(pattern, urlForPattern!)
                 
                 navigationController?.popViewControllerAnimated(true)
             } else {
@@ -58,13 +59,13 @@ class LoaderViewController: UIViewController {
     @IBAction func fetchRLE(sender: AnyObject) {
         let text = patternURL.text!
         
-        let url = NSURL(string: text)!
+        urlForPattern = NSURL(string: text)
         
-        if let path = url.pathExtension {
+        if let path = urlForPattern!.pathExtension {
             let fetcher = Fetcher()
             
             if path == "rle" {
-                fetcher.requestRLE(url) { (rle, message) in
+                fetcher.requestRLE(urlForPattern!) { (rle, message) in
                     let op = NSBlockOperation {
                         if let rle = rle {
                             self.patternGrid.grid = rle.data

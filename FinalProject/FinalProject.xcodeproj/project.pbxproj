@@ -27,6 +27,7 @@
 		7D46C28B1D525D27003497EE /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46C28A1D525D27003497EE /* Fetcher.swift */; };
 		7D46C28E1D5273DE003497EE /* SimulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46C28C1D5273DE003497EE /* SimulationViewController.swift */; };
 		7D46C28F1D5273DE003497EE /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46C28D1D5273DE003497EE /* StatisticsViewController.swift */; };
+		7D46C2911D53BE10003497EE /* LifeGridNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46C2901D53BE10003497EE /* LifeGridNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		7D46C28A1D525D27003497EE /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		7D46C28C1D5273DE003497EE /* SimulationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationViewController.swift; sourceTree = "<group>"; };
 		7D46C28D1D5273DE003497EE /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		7D46C2901D53BE10003497EE /* LifeGridNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeGridNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				7D01D0A51D46C55300FF41E9 /* AppDelegate.swift */,
 				7D01D0A71D46C55300FF41E9 /* InstrumentationViewController.swift */,
 				7D01D0AB1D46C55300FF41E9 /* Main.storyboard */,
+				7D46C2901D53BE10003497EE /* LifeGridNotification.swift */,
 				7D01D0AE1D46C55300FF41E9 /* Assets.xcassets */,
 				7D01D0B01D46C55300FF41E9 /* LaunchScreen.storyboard */,
 				7D01D0B31D46C55300FF41E9 /* Info.plist */,
@@ -244,6 +247,7 @@
 				7D46C27A1D5175DA003497EE /* GridProtocol.swift in Sources */,
 				7D46C27F1D51764E003497EE /* EngineDelegateProtocol.swift in Sources */,
 				7D46C28F1D5273DE003497EE /* StatisticsViewController.swift in Sources */,
+				7D46C2911D53BE10003497EE /* LifeGridNotification.swift in Sources */,
 				7D46C28E1D5273DE003497EE /* SimulationViewController.swift in Sources */,
 				7D46C2871D525B74003497EE /* ConfigurationViewController.swift in Sources */,
 				7D46C2811D51764E003497EE /* StandardEngine.swift in Sources */,
