@@ -14,7 +14,7 @@ class ConfigurationViewController: UITableViewController {
     private var initDataURL = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad
         
         let fetcher = Fetcher()
         

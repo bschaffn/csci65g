@@ -69,13 +69,13 @@ struct LifeRule: CustomStringConvertible {
         
         var bornList = [Int]()
         var stayList = [Int]()
-        if rules[0].containsString("B"){
+        if rules[0].capitalizedString.containsString("B"){
             bornList = intoIntArray(rules[0])
         } else {
             stayList = intoIntArray(rules[0])
         }
         
-        if rules[1].containsString("S"){
+        if rules[1].capitalizedString.containsString("S"){
             stayList = intoIntArray(rules[1])
         } else {
             bornList = intoIntArray(rules[1])
